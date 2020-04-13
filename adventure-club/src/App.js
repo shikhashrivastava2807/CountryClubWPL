@@ -1,25 +1,28 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css'
+import 'holderjs/holder'
+import {
+    BrowserRouter as Router,
+    Route,
+} from 'react-router-dom'
+import HomePage from "./Components/HomePage";
+import ContactUs from "./Components/ContactUs";
+import StaticHeader from "./Components/StaticHeader";
+import MembershipPlans from "./Components/MembershipPlans";
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+        <div className="App">
+            <StaticHeader/>
+            <Route path="/" component={HomePage} exact/>
+            <Route path="/MembershipPlans" component={MembershipPlans} exact/>
+
+        </div>
+    </Router>
   );
 }
 
