@@ -11,6 +11,7 @@ const StaticHeader =  () => (
             <Nav className="mr-auto">
                 <Nav.Link href="Locations">Club Locations</Nav.Link>
                 <Nav.Link href="MembershipPlans">Membership Plans</Nav.Link>
+                <Nav.Link href="Activities">Activities</Nav.Link>
             </Nav>
             <Form inline>
                 <Button variant="outline-info">SignIn</Button>

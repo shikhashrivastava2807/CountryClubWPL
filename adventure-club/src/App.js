@@ -11,6 +11,7 @@ import HomePage from "./Components/HomePage";
 import ContactUs from "./Components/ContactUs";
 import StaticHeader from "./Components/StaticHeader";
 import MembershipPlans from "./Components/MembershipPlans";
+import AllActivities from "./Components/AllActivities";
 
 
 function App() {
@@ -20,7 +21,8 @@ function App() {
             <StaticHeader/>
             <Route path="/" component={HomePage} exact/>
             <Route path="/MembershipPlans" component={MembershipPlans} exact/>
-
+            <Route path="/Activities" component={AllActivities} exact/>
+            
         </div>
     </Router>
   );
