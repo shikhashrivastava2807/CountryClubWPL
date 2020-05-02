@@ -14,7 +14,7 @@ const StaticHeader =  () => (
                 <Nav.Link href="Activities">Activities</Nav.Link>
             </Nav>
             <Form inline>
-                <Button variant="outline-info">SignIn</Button>
+                <Button variant="outline-info" href="login">SignIn</Button>
             </Form>
         </Navbar>
     </>
