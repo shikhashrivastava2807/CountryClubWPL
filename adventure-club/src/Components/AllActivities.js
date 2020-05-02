@@ -1,6 +1,5 @@
 import React from 'react';
 import axios from 'axios';
-import { DataTable } from 'react-data-components';
 import MaterialTable from 'material-table';
 
 function AllActivities() {
@@ -8,6 +7,12 @@ function AllActivities() {
   var org_data;
   var columns;
   var lookup = {};
+  var booking_lookup = {
+    "1":"Yes",
+    "0":"No",
+    1:"Yes",
+    0:"No"
+  }
 
   const delete_row = (id)=>{
     // console.log(id.split('-'));
@@ -88,19 +93,20 @@ function AllActivities() {
     }).then((data) => {
       org_data = data;
     // sort the list of amenities here
-    var i, j, cn, cid;
+    var i, j, club_name, club_objID;
     for(i=0;i<data.length;i++){
-      cn = data[i].cname;
-      cid = data[i]._id;
-      lookup[cid] = cn;
-      for(j=0;j<data[i].aname.length;j++){
-        if(data[i].flag[j] && data[i].status)
+      club_name = data[i].club_name;
+      club_objID = data[i]._id;
+      lookup[club_objID] = club_name;
+      for(j=0;j<data[i].activities.length;j++){
+        if(data[i].status=='1')
           info.push({
-            id: cid+"-"+j,
-            name: data[i].aname[j],
-            desc: data[i].adesc[j],
-            cat: data[i].acat[j],
-            cname: cid
+            id: club_objID+"-"+j,
+            name: data[i].activities[j].name,
+            description: data[i].activities[j].description,
+            category: data[i].activities[j].category,
+            booking_needed: data[i].activities[j].booking_needed,
+            club_name: club_objID
           });
       }
     }
@@ -108,10 +114,11 @@ function AllActivities() {
   
   columns = [
     // {title: 'id', field:'id'},
-    { title: 'Amenities', field: 'name'  },
-    { title: 'Description', field: 'desc' },
-    { title: 'Category', field: 'cat' },
-    { title: 'Club Name', field: 'cname' , lookup: lookup}
+    { title: 'Activity', field: 'name'  },
+    { title: 'Description', field: 'description' },
+    { title: 'Category', field: 'category' },
+    { title: 'Booking required', field: 'booking_needed' , lookup: booking_lookup},
+    { title: 'Club Name', field: 'club_name' , lookup: lookup}
   ];
 
   info = Object.keys(info).map(i => info[i])
@@ -119,7 +126,7 @@ function AllActivities() {
   
   const [state, setState] = React.useState({
     columns: columns,
-    data: info,
+    data: info
   });
 
   return (

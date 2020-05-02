@@ -12,6 +12,7 @@ import ContactUs from "./Components/ContactUs";
 import StaticHeader from "./Components/StaticHeader";
 import MembershipPlans from "./Components/MembershipPlans";
 import AllActivities from "./Components/AllActivities";
+import UserFav from "./Components/UserFav";
 
 
 function App() {
@@ -22,6 +23,8 @@ function App() {
             <Route path="/" component={HomePage} exact/>
             <Route path="/MembershipPlans" component={MembershipPlans} exact/>
             <Route path="/Activities" component={AllActivities} exact/>
+            <Route path="/Favorite" component={UserFav} exact/>
+            
             
         </div>
     </Router>
