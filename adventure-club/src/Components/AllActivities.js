@@ -118,8 +118,8 @@ function AllActivities() {
       }
       columns = [
         // {title: 'id', field:'id'},
-        { title: 'Activity', field: 'name'  },
-        { title: 'Description', field: 'description' },
+        { title: 'Activity', field: 'name' , filtering: false},
+        { title: 'Description', field: 'description', filtering: false },
         { title: 'Category', field: 'category' },
         { title: 'Booking required', field: 'booking_needed' , lookup: booking_lookup},
         { title: 'Club Name', field: 'club_name' , lookup: lookup, editable: 'onAdd'}
@@ -144,6 +144,9 @@ function AllActivities() {
       title="Amenities information"
       columns={state.columns}
       data={state.data}
+      options={{
+        filtering: true
+      }}
       editable={{
         onRowAdd: (newData) =>
           new Promise((resolve) => {
