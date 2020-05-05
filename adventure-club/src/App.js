@@ -15,6 +15,8 @@ import AllActivities from "./Components/AllActivities";
 import Login from './Components/Login'
 import Register from './Components/Register'
 import Profile from './Components/Profile'
+import UserFav from "./Components/UserFav";
+
 
 function App() {
   return (
@@ -27,6 +29,9 @@ function App() {
             <Route path="/register" component={Register} exact/>
             <Route path="/login" component={Login} exact/>
             <Route path="/profile" component={Profile} exact/>            
+            <Route path="/Favorite" component={UserFav} exact/>
+            
+            
         </div>
     </Router>
   );
