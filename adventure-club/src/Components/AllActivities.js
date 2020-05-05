@@ -58,7 +58,7 @@ function AllActivities() {
         }
         columns = [
           // {title: 'id', field:'id'},
-          { title: 'fav', field: 'fav_flag', editable: 'never', hidden: false, defaultSort: 'desc'},
+          { title: 'fav', field: 'fav_flag', editable: 'never', hidden: true},
           { title: 'Activity', field: 'name' , filtering: false},
           { title: 'Description', field: 'description', filtering: false },
           { title: 'Category', field: 'category' },
@@ -67,6 +67,7 @@ function AllActivities() {
         ];
       
         info = Object.keys(info).map(i => info[i])
+        info.sort((a, b) => (a.fav_flag > b.fav_flag) ? -1 : 1)
         columns = Object.keys(columns).map(i => columns[i])
 
         setState({
@@ -117,11 +118,15 @@ function AllActivities() {
         columns={state.columns}
         data={state.data}
         actions={[
-          {
+          
+          rowData=>({
             icon: FavoriteIcon,
-            tooltip: 'Toggle Favorite',
+            tooltip: 'Add To Favorite',
+            disabled: rowData.fav_flag == "1",
             onClick: (event, oldData) => 
             new Promise((resolve) => {
+              console.log(FavoriteIcon);
+              event.button = 1;
               setTimeout(() => {
                 resolve();
                 setState((prevState) => {
@@ -135,7 +140,8 @@ function AllActivities() {
                 });
               }, 600);
             })
-          }
+          })
+          
         ]}
         options={{
           filtering: true
