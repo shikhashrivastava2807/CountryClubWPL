@@ -1,0 +1,76 @@
+[{
+  "_id": {
+    "$oid": "5eacc223a1256659500aab26"
+  },
+  "club_name": "clubname",
+  "club_type": "Beach",
+  "address_line1": "abc",
+  "address_line2": "def",
+  "zip": "12345",
+  "City": "Miami",
+  "State": "Florida",
+  "status": "1",
+  "imagesPath": [
+    "img1.jpg",
+    "img2.jpg",
+    "img3.jpg"
+  ],
+  "description": "Description",
+  "activities": [
+    {
+      "name": "Golf",
+      "category": "Outdoor",
+      "description": "fun activity",
+      "booking_needed": "1",
+      "status": 1
+    },
+    {
+      "name": "Pool",
+      "category": "Indoor",
+      "description": "abc",
+      "booking_needed": "1",
+      "status": 1
+    }
+  ]
+},{
+  "_id": {
+    "$oid": "5eacc283a1256659500aab27"
+  },
+  "club_name": "First club",
+  "club_type": "Resort",
+  "address_line1": "abc",
+  "address_line2": "def",
+  "zip": "12345",
+  "City": "Miami",
+  "State": "Florida",
+  "status": "1",
+  "imagesPath": [
+    "img1.jpg",
+    "img2.jpg",
+    "img3.jpg"
+  ],
+  "description": "Description",
+  "activities": [
+    {
+      "name": "Golf",
+      "category": "Outdoor",
+      "description": "fun activity",
+      "booking_needed": "1",
+      "status": 1
+    },
+    {
+      "name": "Pool",
+      "category": "Indoor",
+      "description": "abcd",
+      "booking_needed": "1",
+      "status": 1
+    },
+    {
+      "status": 1,
+      "name": "Bungee Jump",
+      "description": "New outdoor activity",
+      "category": "outdoor",
+      "booking_needed": "1"
+    }
+  ]
+}]
