@@ -16,7 +16,6 @@ const StaticHeader =  () => (
 
             </Nav>
             <Form inline>
-                <Button variant="outline-info" href="login">SignIn</Button>
                 
             <Dropdown>
             <Dropdown.Toggle variant="success" id="dropdown-basic">
