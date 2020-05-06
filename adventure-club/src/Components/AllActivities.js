@@ -13,10 +13,13 @@ function AllActivities() {
     1:"Yes",
     0:"No"
   }
+<<<<<<< Updated upstream
   const [state, setState] = React.useState({
     columns: columns,
     data: info
   });
+=======
+>>>>>>> Stashed changes
 
   const delete_row = (id)=>{
     // console.log(id.split('-'));
@@ -99,6 +102,7 @@ function AllActivities() {
     }).then((data) => {
       // org_data = data;
     // sort the list of amenities here
+<<<<<<< Updated upstream
       var i, j, club_name, club_objID;
       for(i=0;i<data.length;i++){
         club_name = data[i].club_name;
@@ -127,6 +131,35 @@ function AllActivities() {
     
       info = Object.keys(info).map(i => info[i])
       columns = Object.keys(columns).map(i => columns[i])
+=======
+    var i, j, club_name, club_objID;
+    for(i=0;i<data.length;i++){
+      club_name = data[i].club_name;
+      club_objID = data[i]._id;
+      lookup[club_objID] = club_name;
+      for(j=0;j<data[i].activities.length;j++){
+        if(data[i].status=='1')
+          info.push({
+            id: club_objID+"-"+j,
+            name: data[i].activities[j].name,
+            description: data[i].activities[j].description,
+            category: data[i].activities[j].category,
+            booking_needed: data[i].activities[j].booking_needed,
+            club_name: club_objID
+          });
+      }
+    }
+  });
+  
+  columns = [
+    // {title: 'id', field:'id'},
+    { title: 'Activity', field: 'name'  },
+    { title: 'Description', field: 'description' },
+    { title: 'Category', field: 'category' },
+    { title: 'Booking required', field: 'booking_needed' , lookup: booking_lookup},
+    { title: 'Club Name', field: 'club_name' , lookup: lookup}
+  ];
+>>>>>>> Stashed changes
 
       setState({
         columns: columns,
@@ -136,6 +169,13 @@ function AllActivities() {
 
   },[]);
   
+<<<<<<< Updated upstream
+=======
+  const [state, setState] = React.useState({
+    columns: columns,
+    data: info
+  });
+>>>>>>> Stashed changes
 
   return (
     <div>
