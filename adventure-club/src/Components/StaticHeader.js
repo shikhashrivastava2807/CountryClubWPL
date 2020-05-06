@@ -16,12 +16,7 @@ const StaticHeader =  () => (
 
             </Nav>
             <Form inline>
-<<<<<<< HEAD
                 <Button variant="outline-info" href="login">SignIn</Button>
-<<<<<<< Updated upstream
-=======
-=======
->>>>>>> Stashed changes
                 
             <Dropdown>
             <Dropdown.Toggle variant="success" id="dropdown-basic">
@@ -35,10 +30,6 @@ const StaticHeader =  () => (
             </Dropdown.Menu>
             </Dropdown>
       
-<<<<<<< Updated upstream
-=======
->>>>>>> aefcfe2... Added Fav tab
->>>>>>> Stashed changes
             </Form>
         </Navbar>
     </>
