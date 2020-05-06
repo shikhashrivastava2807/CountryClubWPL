@@ -2,11 +2,9 @@ import React from 'react';
 import axios from 'axios';
 import MaterialTable from 'material-table';
 import FavoriteIcon from '@material-ui/icons/Favorite';
-import Button from '@material-ui/core/Button';
-
+import ConfirmationNumberIcon from '@material-ui/icons/ConfirmationNumber';
 function AllActivities() {
   var info = [];
-  var org_data;
   var columns;
   var lookup = {};
   var booking_lookup = {
@@ -110,11 +108,12 @@ function AllActivities() {
           });
       
     }
+    
     return (
       <div>
         <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"></link>
       <MaterialTable
-        title="Amenities information"
+        title="Activities information"
         columns={state.columns}
         data={state.data}
         actions={[
@@ -123,6 +122,30 @@ function AllActivities() {
             icon: FavoriteIcon,
             tooltip: 'Add To Favorite',
             disabled: rowData.fav_flag == "1",
+            onClick: (event, oldData) => 
+            new Promise((resolve) => {
+              console.log(FavoriteIcon);
+              event.button = 1;
+              setTimeout(() => {
+                resolve();
+                setState((prevState) => {
+                  const data = [...prevState.data];
+                  // console.log(prevState);
+                  // console.log(prevState.data[prevState.data.indexOf(oldData)]);
+                  data[data.indexOf(oldData)].fav_flag = 1;
+                  add_fav(prevState.data[prevState.data.indexOf(oldData)].id);
+                  // data.splice(data.indexOf(oldData), 1);
+                  return { ...prevState, data };
+                });
+              }, 600);
+            })
+          }),
+
+          
+          rowData=>({
+            icon: ConfirmationNumberIcon,
+            tooltip: 'Confirm Booking',
+            disabled: rowData.booking_needed == "0",
             onClick: (event, oldData) => 
             new Promise((resolve) => {
               console.log(FavoriteIcon);
