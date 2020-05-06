@@ -31,11 +31,11 @@ function App() {
             <Navbars />
             <Route path="/" component={HomePage} exact/>
             <Route path="/MembershipPlans" component={MembershipPlans} exact/>
-            <Route path="/Activities" component={AllActivities} exact/>
+            <Route path="/Activities/:clubId" component={AllActivities} exact/>
+            {/* <Route path="/Activities/" component={Locations} exact/> */}
             <Route path="/register" component={Register} exact/>
             <Route path="/login" component={Login} exact/>
             <Route path="/profile" component={Profile} exact/>
-            <Route path="/Favorite" component={UserFav} exact/>
             <Route path="/Favorite" component={UserFav} exact/>
             <Route path="/Locations" component={Locations} exact/>
             <Route path="/Locations/details/:clubId" component={LocationDetails} />

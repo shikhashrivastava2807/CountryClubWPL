@@ -63,7 +63,7 @@ class HomePage extends Component {
       
       <Navbar bg="dark" variant="dark">
       <Nav className="mr-auto">
-          <Nav.Link href="Locations">Club Locations</Nav.Link>
+          <Nav.Link href="/Locations">Club Locations</Nav.Link>
       </Nav>
       <Form inline>
           <Dropdown>
@@ -72,7 +72,7 @@ class HomePage extends Component {
             </Dropdown.Toggle>
           <Dropdown.Menu>
                 <Dropdown.Item href="/profile">Profile</Dropdown.Item>
-                <Dropdown.Item href="#/action-2">Favorites</Dropdown.Item>
+                <Dropdown.Item href="/Favorite">Favorites</Dropdown.Item>
                 <Dropdown.Item href="" onClick={this.logOut.bind(this)}>Logout</Dropdown.Item>
             </Dropdown.Menu>
             </Dropdown>
@@ -83,10 +83,10 @@ class HomePage extends Component {
     const adminLink = (
       <Navbar bg="dark" variant="dark">
       <Nav className="mr-auto">
-          <Nav.Link href="Locations">Club Locations</Nav.Link>
-          <Nav.Link href="MembershipPlans">Membership Plans</Nav.Link>
-          <Nav.Link href="Activities">Activities</Nav.Link>
-          <Nav.Link href="UserDetails">Users</Nav.Link>
+          <Nav.Link href="/Locations">Club Locations</Nav.Link>
+          <Nav.Link href="/MembershipPlans">Membership Plans</Nav.Link>
+          <Nav.Link href="/Activities">Activities</Nav.Link>
+          <Nav.Link href="/UserDetails">Users</Nav.Link>
           </Nav>
           <Form inline>
           <Dropdown>
