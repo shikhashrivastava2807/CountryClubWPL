@@ -2,6 +2,9 @@ import React, { Component } from 'react'
 import { Link, withRouter } from 'react-router-dom'
 //import Profile from './Profile';
 import jwt_decode from 'jwt-decode'
+import { Form, Button, FormControl, Dropdown } from "react-bootstrap";
+import Navbar from 'react-bootstrap/Navbar';
+import Nav from 'react-bootstrap/Nav';
 
 class HomePage extends Component {
   logOut(e) {
@@ -41,38 +44,74 @@ class HomePage extends Component {
 
 
   render() {
+  
+    console.log(localStorage.isAdmin)
     const loginRegLink = (
-      <ul className="navbar-nav">
-        <li className="nav-item">
-          <Link to="/login" className="nav-link">
-            Login
-          </Link>
-        </li>
-        <li className="nav-item">
-          <Link to="/register" className="nav-link">
-            Register
-          </Link>
-        </li>
-      </ul>
+      <Navbar bg="dark" variant="dark">
+      {/* <Navbar.Brand href="/">HomeLogo</Navbar.Brand> */}
+      <Nav className="mr-auto">
+          <Nav.Link href="Locations">Club Locations</Nav.Link>
+          <Nav.Link href="MembershipPlans">Membership Plans</Nav.Link>
+      </Nav>
+      <div className = "float-right"> 
+      <Button variant="outline-info" href="login">Sign In</Button>
+      </div>  
+        </Navbar>
     )
 
     const userLink = (
-      <ul className="navbar-nav">
-        <li className="nav-item">
-          <Link to="/profile" className="nav-link">
-            User
-          </Link>
-        </li>
-        <li className="nav-item">
-          <a href="" onClick={this.logOut.bind(this)} className="nav-link">
-            Logout
-          </a>
-        </li>
-        <li className="nav-item">
-          Hi {localStorage.first_name}
-        </li> }
-      </ul>
+      
+      <Navbar bg="dark" variant="dark">
+      <Nav className="mr-auto">
+          <Nav.Link href="Locations">Club Locations</Nav.Link>
+      </Nav>
+      <Form inline>
+          <Dropdown>
+            <Dropdown.Toggle variant="success" id="dropdown-basic">
+            Hi {localStorage.first_name}
+            </Dropdown.Toggle>
+          <Dropdown.Menu>
+                <Dropdown.Item href="/profile">Profile</Dropdown.Item>
+                <Dropdown.Item href="#/action-2">Favorites</Dropdown.Item>
+                <Dropdown.Item href="" onClick={this.logOut.bind(this)}>Logout</Dropdown.Item>
+            </Dropdown.Menu>
+            </Dropdown>
+            </Form>    
+        </Navbar>   
     )
+
+    const adminLink = (
+      <Navbar bg="dark" variant="dark">
+      <Nav className="mr-auto">
+          <Nav.Link href="Locations">Club Locations</Nav.Link>
+          <Nav.Link href="MembershipPlans">Membership Plans</Nav.Link>
+          <Nav.Link href="Activities">Activities</Nav.Link>
+          <Nav.Link href="UserDetails">Users</Nav.Link>
+          </Nav>
+          <Form inline>
+          <Dropdown>
+            <Dropdown.Toggle variant="success" id="dropdown-basic">
+            Hi {localStorage.first_name}
+            </Dropdown.Toggle>
+          <Dropdown.Menu>
+                <Dropdown.Item href="/profile">Profile</Dropdown.Item>
+                <Dropdown.Item href="" onClick={this.logOut.bind(this)}>Logout</Dropdown.Item>
+            </Dropdown.Menu>
+            </Dropdown>
+            </Form>  
+        </Navbar>
+    )
+
+    // const showNavBar = function(){
+    //   if(localStorage.first_name){
+    //     if(localStorage.isAdmin) {
+    //       return adminLink
+    //     }
+    //     return userLink
+    //   }
+    //   return loginRegLink
+    //   // return (localStorage.first_name ? (localStorage.isAdmin ? adminLink : userLink) : loginRegLink);
+    // }
 
     return (
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark rounded">
@@ -99,7 +138,8 @@ class HomePage extends Component {
               </Link>
             </li>
           </ul>
-          {localStorage.first_name ? userLink : loginRegLink}
+          {localStorage.first_name ? ((localStorage.isAdmin === "True") ? adminLink : userLink) : loginRegLink}
+          {console.log(localStorage.isAdmin)}
         </div>
       </nav>
     )

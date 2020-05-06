@@ -29,7 +29,7 @@ class Login extends Component {
 
     login(user).then(res => {
       if (res) {
-        this.props.history.push(`/profile`)
+        this.props.history.push(`/`)
       } else {
         this.props.history.push(`/error`)
       }
@@ -72,11 +72,12 @@ class Login extends Component {
                 type="submit"
                 className="btn btn-lg btn-primary btn-block"
               >
-                Sign in
+                Sign In
               </button>
-              <Button variant="outline-info" href="register">Not a member? Register now</Button>
-              
             </form>
+            <div className="p-2">
+            <Button variant="outline-info" href="register">Not a member? Register now</Button>
+            </div>
           </div>
         </div>
       </div>

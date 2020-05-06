@@ -1,5 +1,4 @@
 import React from "react";
-<<<<<<< Updated upstream
 import MaterialTable from 'material-table';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 
@@ -135,20 +134,5 @@ function UserFav() {
 }
 
 
-=======
-import ContactUs from "./ContactUs";
-import DemoSlider from "./DemoSlider";
-
-
-function UserFav() {
-    return (
-            <>
-                <DemoSlider/>
-                <ContactUs/>
-            </>
-    );
-}
-
->>>>>>> Stashed changes
 export default UserFav;
 

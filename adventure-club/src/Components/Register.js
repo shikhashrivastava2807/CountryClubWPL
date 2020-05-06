@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { register } from './UserFunctions'
 import $ from 'jquery'
+import { Row, Col, Form, Dropdown } from "react-bootstrap";
 
 class Register extends Component {
   constructor() {
@@ -10,6 +11,7 @@ class Register extends Component {
       last_name: '',
       email: '',
       password: '',
+      membership_type: '',
       isAdmin: false,
       errors: {}
     }
@@ -45,7 +47,8 @@ class Register extends Component {
         first_name: this.state.first_name,
         last_name: this.state.last_name,
         email: this.state.email,
-        password: this.state.password
+        password: this.state.password,
+        membership_type: this.state.membership_type
       }
   
       register(newUser).then(res => {
@@ -110,6 +113,7 @@ class Register extends Component {
                   required
                 />
               </div>
+
               <div className="form-group">
                 <label htmlFor="email">Email address</label>
                 <input
@@ -135,6 +139,47 @@ class Register extends Component {
                   required
                 />
               </div>
+                            
+              {/* <div className="form-group">
+              <Form>
+              <fieldset>
+                <Form.Group as={Row}>
+                <Form.Label as="legend" column sm={1}>
+                                Membership Type
+                </Form.Label>
+                <Col sm={8}>
+                <Form.Check
+                    type="radio"
+                    label="Basic"
+                    name="membership_type"
+                    id="membership_type"
+                    value={this.state.membership_type}
+                    onChange={this.onChange}
+                    required
+                />
+                <Form.Check
+                  type="radio"
+                  label="Standard"
+                  name="membership_type"
+                  id="membership_type"
+                  value={this.state.membership_type}
+                  onChange={this.onChange}
+                  required
+                />
+                <Form.Check
+                  type="radio"
+                  label="Premium"
+                  name="membership_type"
+                  id="membership_type"
+                  value={this.state.membership_type}
+                  onChange={this.onChange}
+                  required
+                />
+                </Col>
+                </Form.Group>
+    </fieldset>
+    </Form>
+              </div> */}
               <button
                 type="submit" id="check"
                 className="btn btn-lg btn-primary btn-block"

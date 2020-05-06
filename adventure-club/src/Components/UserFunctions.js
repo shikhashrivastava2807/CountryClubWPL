@@ -3,11 +3,13 @@ import jwt_decode from 'jwt-decode'
 
 export const register = newUser => {
   return axios
-    .post('users/register', {
+    .post('http://localhost:3000/users/register', {
       first_name: newUser.first_name,
       last_name: newUser.last_name,
       email: newUser.email,
-      password: newUser.password
+      password: newUser.password,
+      membership_type: newUser.membership_type,
+      isAdmin: false
     })
     .then(response => {
       console.log('Registered')
@@ -16,7 +18,7 @@ export const register = newUser => {
 
 export const login = user => {
   return axios
-    .post('users/login', {
+    .post('http://localhost:3000/users/login', {
       email: user.email,
       password: user.password
     })
@@ -35,11 +37,25 @@ export const login = user => {
 
 export const getProfile = user => {
   return axios
-    .get('users/profile', {
+    .get('http://localhost:3000/users/profile', {
       //headers: { Authorization: ` ${this.getToken()}` }
     })
     .then(response => {
       console.log(response)
+      return response.data
+    })
+    .catch(err => {
+      console.log(err)
+    })
+}
+
+export const getUserdetails= user => {
+  return axios
+    .get('http://localhost:3000/users/userdetails', {
+      //headers: { Authorization: ` ${this.getToken()}` }
+    })
+    .then(response => {
+      console.log("Hello")
       return response.data
     })
     .catch(err => {

@@ -13,6 +13,7 @@ const StaticHeader =  () => (
                 <Nav.Link href="Locations">Club Locations</Nav.Link>
                 <Nav.Link href="MembershipPlans">Membership Plans</Nav.Link>
                 <Nav.Link href="Activities">Activities</Nav.Link>
+                <Nav.Link href="Profile">Profile</Nav.Link>
 
             </Nav>
             <Form inline>
@@ -22,6 +23,8 @@ const StaticHeader =  () => (
                 User Name
             </Dropdown.Toggle>
 
+            
+
             <Dropdown.Menu>
                 <Dropdown.Item href="Favorite">Favorites</Dropdown.Item>
                 <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
@@ -30,6 +33,8 @@ const StaticHeader =  () => (
             </Dropdown>
       
             </Form>
+
+            
         </Navbar>
     </>
 );

@@ -7,6 +7,7 @@ class Profile extends Component {
       first_name: '',
       last_name: '',
       email: '',
+      membership_type: '',
       errors: {}
     }
   }
@@ -16,6 +17,7 @@ class Profile extends Component {
       first_name: localStorage.first_name,
       last_name: localStorage.last_name,
       email: localStorage.email,
+      membership_type: localStorage.membership_type,
       isAdmin: localStorage.isAdmin
     })
     console.log(JSON.stringify(this.state));
@@ -40,12 +42,17 @@ class Profile extends Component {
               </tr>
               <tr>
                 <td>Email</td>
-                <td>{localStorage.email}......{this.state.isAdmin}</td>
+                <td>{localStorage.email}</td>
+              </tr>
+              <tr>
+                <td>Membership Type</td>
+                <td>{localStorage.membership_type}......{this.state.isAdmin}</td>
               </tr>
             </tbody>
           </table>
         </div>
       </div>
+
     )
   }
 }
