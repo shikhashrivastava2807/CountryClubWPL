@@ -33,8 +33,6 @@ function App() {
             <Route path="/profile" component={Profile} exact/>            
             <Route path="/Favorite" component={UserFav} exact/> 
             <Route path="/UserDetails" component={UserDetails} exact/>   
-            <Route path="/profile" component={Profile} exact/>
-            <Route path="/Favorite" component={UserFav} exact/>
             <Route path="/Locations" component={Locations} exact/>
             <Route path="/Locations/details/:clubId" component={LocationDetails} />
         </div>
