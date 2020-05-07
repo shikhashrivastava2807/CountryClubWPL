@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import {Button,Modal,Form} from "react-bootstrap";
 import Col from "react-bootstrap/Col";
-import {editClub} from "./ClubLocationFunction";
+import {editClub} from "./LocationFunction";
 
 export class DeleteLocation extends Component {
     state = {

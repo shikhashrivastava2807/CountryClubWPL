@@ -16,8 +16,8 @@ import Profile from './Components/LoginRegistration/Profile'
 import UserFav from "./Components/UserFav";
 import Navbars from "./Components/Navbars"
 import UserDetails from "./Components/LoginRegistration/UserDetails"
-import {Locations} from "./Components/Locations";
-import {LocationDetails} from "./Components/LocationDetails";
+import {Locations} from "./Components/ClubLocations/Locations";
+import {LocationDetails} from "./Components/ClubLocations/LocationDetails";
 
 function App() {
   return (

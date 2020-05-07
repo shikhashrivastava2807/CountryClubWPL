@@ -1,34 +1,33 @@
 import React, {Component} from "react";
 import {Button,Modal,Form} from "react-bootstrap";
 import Col from "react-bootstrap/Col";
-import {createNewClubs} from "./ClubLocationFunction";
+import {editClub} from "./LocationFunction";
 
-export class AddNewLocation extends Component {
-    constructor() {
-        super()
-        this.state = {
-            club_name: '',
-            club_type: '',
-            address_line1: '',
-            address_line2: '',
-            zip: '',
-            city: '',
-            states: '',
-            imagesPath1: '',
-            imagesPath2: '',
-            imagesPath3: '',
-            description: ''
-        };
-        this.onChange = this.onChange.bind(this)
-        this.onSubmit = this.onSubmit.bind(this)
-    }
+export class EditLocationDetails extends Component {
+    state = {
+        id: this.props.id,
+        club_name: this.props.club_name,
+        club_type: this.props.club_type,
+        address_line1: this.props.address_line1,
+        address_line2: this.props.address_line2,
+        zip: this.props.zip,
+        city: this.props.city,
+        states: this.props.states,
+        images_path1: this.props.images_path1,
+        images_path2: this.props.images_path2,
+        images_path3: this.props.images_path3,
+        description: this.props.description
+    };
 
-    onChange(e) {
-        this.setState({ [e.target.name]: e.target.value })
-    }
 
-    onSubmit(e) {
-        const newClub = {
+    handleChange = event => {
+        this.setState({ [event.target.name]: event.target.value });
+    };
+
+
+     onSubmit = event => {
+        const clubInfo = {
+            id: this.state.id,
             club_name: this.state.club_name,
             club_type: this.state.club_type,
             address_line1: this.state.address_line1,
@@ -37,27 +36,26 @@ export class AddNewLocation extends Component {
             City: this.state.city,
             State: this.state.states,
             imagesPath: [
-                this.state.imagesPath1,
-                this.state.imagesPath2,
-                this.state.imagesPath3
+                this.state.images_path1,
+                this.state.images_path2,
+                this.state.images_path3
             ],
             description: this.state.description
         };
-        createNewClubs(newClub).then(res => {
+        editClub(clubInfo).then(res => {
+            console.log('onedit')
             this.props.onHide();
-            // this.props.history.push(`/Locations`)
         });
     }
 
     render() {
-        const data = require('../assets/states-list');
+        const data = require('../../assets/states-list');
 
         let stateList = data.map(function(item) {
             return (
                 <option key={item.name}>{item.name}</option>
             );
         });
-        console.log('abc');
         return(
             <>
                 <Modal
@@ -69,7 +67,7 @@ export class AddNewLocation extends Component {
                 >
                     <Modal.Header closeButton>
                         <Modal.Title id="contained-modal-title-vcenter">
-                            Add New Club Locations
+                            Edit Club Locations
                         </Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
@@ -81,7 +79,7 @@ export class AddNewLocation extends Component {
                                                   name="club_name"
                                                   value={this.state.club_name}
                                                   placeholder="Enter Location Name"
-                                                  onChange = {this.onChange}
+                                                  onChange = {this.handleChange}
                                                   required
                                     />
                                 </Form.Group>
@@ -90,7 +88,7 @@ export class AddNewLocation extends Component {
                                     <Form.Control as="select"
                                                   name="club_type"
                                                   value={this.state.club_type}
-                                                  onChange = {this.onChange}>
+                                                  onChange = {this.handleChange}>
                                         <option >Choose...</option>
                                         <option>Beach</option>
                                         <option>Mountains</option>
@@ -103,7 +101,7 @@ export class AddNewLocation extends Component {
                                 <Form.Control placeholder="1234 Main St"
                                               name="address_line1"
                                               value={this.state.address_line1}
-                                              onChange = {this.onChange}
+                                              onChange = {this.handleChange}
                                               required/>
                             </Form.Group>
                             <Form.Group controlId="formGridAddress2">
@@ -111,7 +109,7 @@ export class AddNewLocation extends Component {
                                 <Form.Control placeholder="Apartment, studio, or floor"
                                               name="address_line2"
                                               value={this.state.address_line2}
-                                              onChange = {this.onChange}
+                                              onChange = {this.handleChange}
                                               required/>
                             </Form.Group>
                             <Form.Row>
@@ -119,7 +117,7 @@ export class AddNewLocation extends Component {
                                     <Form.Label>City</Form.Label>
                                     <Form.Control name="city"
                                                   value={this.state.city}
-                                                  onChange = {this.onChange}
+                                                  onChange = {this.handleChange}
                                                   required/>
                                 </Form.Group>
                                 <Form.Group as={Col} controlId="formGridState">
@@ -127,7 +125,7 @@ export class AddNewLocation extends Component {
                                     <Form.Control as="select"
                                                   name="states"
                                                   value={this.state.states}
-                                                  onChange = {this.onChange}
+                                                  onChange = {this.handleChange}
                                                   required>
                                         <option>Choose...</option>
                                         {stateList}
@@ -137,7 +135,7 @@ export class AddNewLocation extends Component {
                                     <Form.Label>Zip</Form.Label>
                                     <Form.Control name="zip"
                                                   value={this.state.zip}
-                                                  onChange = {this.onChange}
+                                                  onChange = {this.handleChange}
                                     />
                                 </Form.Group>
                             </Form.Row>
@@ -145,24 +143,24 @@ export class AddNewLocation extends Component {
                                 <Form.Group as={Col} controlId="formDemoImage1">
                                     <Form.Label>Image1</Form.Label>
                                     <Form.Control placeholder="abc.jpg/abc.png"
-                                                  name="imagesPath1"
-                                                  value={this.state.imagesPath1}
-                                                  onChange = {this.onChange}
+                                                  name="images_path1"
+                                                  value={this.state.images_path1}
+                                                  onChange = {this.handleChange}
                                                   required/>
                                 </Form.Group>
                                 <Form.Group as={Col} controlId="formDemoImage2">
                                     <Form.Label>Image2</Form.Label>
                                     <Form.Control placeholder="abc.jpg/abc.png"
-                                                  name="imagesPath2"
-                                                  value={this.state.imagesPath2}
-                                                  onChange = {this.onChange}/>
+                                                  name="images_path2"
+                                                  value={this.state.images_path2}
+                                                  onChange = {this.handleChange}/>
                                 </Form.Group>
                                 <Form.Group as={Col} controlId="formDemoImage3">
                                     <Form.Label>Image3</Form.Label>
                                     <Form.Control placeholder="abc.jpg/abc.png"
-                                                  name="imagesPath3"
-                                                  value={this.state.imagesPath3}
-                                                  onChange = {this.onChange}/>
+                                                  name="images_path3"
+                                                  value={this.state.images_path3}
+                                                  onChange = {this.handleChange}/>
                                 </Form.Group>
                             </Form.Row>
                             <Form.Row>
@@ -172,7 +170,7 @@ export class AddNewLocation extends Component {
                                                   rows="2"
                                                   name="description"
                                                   value={this.state.description}
-                                                  onChange = {this.onChange}/>
+                                                  onChange = {this.handleChange}/>
                                 </Form.Group>
                             </Form.Row>
                             <div className="float-right">
@@ -183,7 +181,7 @@ export class AddNewLocation extends Component {
                     </Modal.Body>
 
                 </Modal>
-              </>
+            </>
         )
 
     }

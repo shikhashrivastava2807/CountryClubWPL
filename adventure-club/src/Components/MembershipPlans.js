@@ -53,7 +53,7 @@ const MembershipPlans =  () => (
                     <td><Check /></td>
                 </tr>
                 <tr>
-                    <td>Fast Track Amenitties</td>
+                    <td>Fast Track Amenities</td>
                     <td><X /></td>
                     <td><Check /></td>
                     <td><Check /></td>
@@ -80,7 +80,7 @@ const MembershipPlans =  () => (
                     <Card.Body>
                         <Card.Title>Standard Membership</Card.Title>
                         <Card.Text>
-                            Privileges of inviting your extended family and friends with access to Fast Track Amenitties and the Spa!
+                            Privileges of inviting your extended family and friends with access to Fast Track Amenities and the Spa!
                         </Card.Text>
                     </Card.Body>
 

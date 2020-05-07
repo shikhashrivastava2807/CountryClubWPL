@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import {Button,Col} from "react-bootstrap";
 import {AddNewLocation} from "./AddNewLocation"
-import {ClubLocationList} from "./ClubLocationList";
+import {LocationList} from "./LocationList";
 import {PlusCircleFill} from "react-bootstrap-icons";
 
 
@@ -33,7 +33,7 @@ export class Locations extends Component{
                     </div>
                     <div>
                         <Col md={12}>
-                            <ClubLocationList/>
+                            <LocationList/>
                         </Col>
                     </div>
             </>
