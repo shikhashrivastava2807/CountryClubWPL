@@ -16,43 +16,58 @@ function AllActivities() {
     columns: columns,
     data: info
   });
-  var bool_val = 1;
+  var current_ClubID = window.location.pathname.split('/');
+  current_ClubID = current_ClubID[current_ClubID.length-1];
+  var userid = localStorage.getItem('email');
+  var is_admin = localStorage.getItem('isAdmin');
+  // console.log("admin status:"+is_admin);
+
 
   React.useEffect(()=>{
 
-    fetch('http://localhost:3000/fav/'+'userid', { method: "get" }).then((response) => {
+    fetch('http://localhost:3000/fav/'+userid, { method: "get" }).then((response) => {
       return response.json();
     }).then((user_fav)=>{
-        fetch('http://localhost:3000/clubs/', { method: "get" }).then((response) => {
+        fetch('http://localhost:3000/clubs/'+current_ClubID, { method: "get" }).then((response) => {
         return response.json();
       }).then((data) => {
-        // org_data = data;
-        // sort the list of amenities here
-        // console.log(user_fav)
-        var i, j, club_name, club_objID, val;
-        for(i=0;i<data.length;i++){
-          club_name = data[i].club_name;
-          club_objID = data[i]._id;
-          lookup[club_objID] = club_name;
-          for(j=0;j<data[i].activities.length;j++){
-            val = 0
-            if(Object.keys(user_fav).includes(data[i]._id)){
-              if (user_fav[data[i]._id].includes(j.toString())){
-                val = 1;
-              }
-            }
-            if(data[i].status=='1' && data[i].activities[j].status==1)
-              info.push({
-                id: club_objID+"-"+j,
-                name: data[i].activities[j].name,
-                description: data[i].activities[j].description,
-                category: data[i].activities[j].category,
-                booking_needed: data[i].activities[j].booking_needed,
-                club_name: club_objID,
-                fav_flag: val
-              });
-          }
+        if(user_fav==null){
+          fetch('http://localhost:3000/fav/', {
+            method: "put",
+            headers: {
+                "Content-Type": "application/json; charset=utf-8"
+            },
+            body: JSON.stringify({"_id": userid})
+          })
+          user_fav = {};
         }
+        var i, j, club_name, club_objID, val;
+        club_name = data.club_name;
+        club_objID = data._id;
+        lookup[club_objID] = club_name;
+        for(j=0;j<data.activities.length;j++){
+          val = 0
+          if(Object.keys(user_fav).includes(data._id)){
+            if (user_fav[data._id].includes(j.toString())){
+              val = 1;
+            }
+          }
+          
+          if(data.status=='1' && data.activities[j].status==1){
+            info.push({
+              id: club_objID+"-"+j,
+              name: data.activities[j].name,
+              description: data.activities[j].description,
+              category: data.activities[j].category,
+              booking_needed: data.activities[j].booking_needed,
+              club_name: club_objID,
+              fav_flag: val
+            });
+            // console.log(data._id, data.activities[j].name);
+          }
+            
+        }
+        
         columns = [
           // {title: 'id', field:'id'},
           { title: 'fav', field: 'fav_flag', editable: 'never', hidden: true},
@@ -77,13 +92,13 @@ function AllActivities() {
 
   },[]);
     
-  if (bool_val){
+  if (is_admin=='false'){
 
     const add_fav = (id)=>{
       // console.log(id.split('-'));
       var param = id.split('-');
       var club_id = param[0], activity_index = param[1];
-      fetch('http://localhost:3000/fav/'+'userid', { method: "get" }).then((response) => {
+      fetch('http://localhost:3000/fav/'+userid, { method: "get" }).then((response) => {
         return response.json();
        }).then((user_fav)=>{
           delete user_fav._id;
@@ -97,7 +112,7 @@ function AllActivities() {
           return user_fav;
           }).then((user_fav)=>{
           // console.log(user_fav);
-          return fetch('http://localhost:3000/fav/'+'userid', {
+          return fetch('http://localhost:3000/fav/'+userid, {
                       method: "put",
                       headers: {
                           "Content-Type": "application/json; charset=utf-8"
@@ -123,7 +138,7 @@ function AllActivities() {
             disabled: rowData.fav_flag == "1",
             onClick: (event, oldData) => 
             new Promise((resolve) => {
-              console.log(FavoriteIcon);
+              // console.log(FavoriteIcon);
               event.button = 1;
               setTimeout(() => {
                 resolve();

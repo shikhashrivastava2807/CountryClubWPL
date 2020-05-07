@@ -1,5 +1,8 @@
 import React, { Component } from 'react'
 import { register } from './UserFunctions'
+import { Col, Form } from "react-bootstrap";
+import {AddRegisterModal} from './AddRegisterModal';
+
 
 class Register extends Component {
   constructor() {
@@ -11,13 +14,15 @@ class Register extends Component {
       password: '',
       membership_type: '',
       isAdmin: false,
-      errors: {}
+      errors: {},
+      addModalShow: false
     }
 
     this.onChange = this.onChange.bind(this)
     this.onSubmit = this.onSubmit.bind(this)
   }
 
+//using jquery to validate that all mandatory fields are filled
   validate() {
     let allAreFilled = true;
     document.getElementById("myForm").querySelectorAll("[required]").forEach(function(i) {
@@ -38,7 +43,8 @@ class Register extends Component {
       if (!i.value) allAreFilled = false;
     })
     if(!allAreFilled) {
-      alert('Fill all the fields');
+      //alert('Kindly fill all fields');
+      this.setState({addModalShow: true})
     }
     else{
       const newUser = {
@@ -46,7 +52,8 @@ class Register extends Component {
         last_name: this.state.last_name,
         email: this.state.email,
         password: this.state.password,
-        membership_type: this.state.membership_type
+        membership_type: this.state.membership_type,
+        isAdmin: this.state.isAdmin
       }
   
       register(newUser).then(res => {
@@ -55,30 +62,8 @@ class Register extends Component {
     }
   }
 
-
- 
-
-  // componentDidMount() {
-
-  //   $(document).ready(function() {
-
-  //         // window.onload=function(){
-  //   document.getElementById("check").onclick = function() {
-  //     let allAreFilled = true;
-  //     document.getElementById("myForm").querySelectorAll("[required]").forEach(function(i) {
-  //       if (!allAreFilled) return;
-  //       if (!i.value) allAreFilled = false;
-  //     })
-  //     if (!allAreFilled) {
-  //       alert('Fill all the fields');
-  //     }
-  //   };
-  // // }
-
-  // });
-  // }
-
   render() {
+    let addModalClose = () => this.setState({addModalShow: false});
     return (
         <div id="myForm">
       <div className="container">
@@ -138,52 +123,31 @@ class Register extends Component {
                 />
               </div>
                             
-              {/* <div className="form-group">
+              <div className="form-group">
               <Form>
-              <fieldset>
-                <Form.Group as={Row}>
-                <Form.Label as="legend" column sm={1}>
-                                Membership Type
-                </Form.Label>
-                <Col sm={8}>
-                <Form.Check
-                    type="radio"
-                    label="Basic"
-                    name="membership_type"
-                    id="membership_type"
-                    value={this.state.membership_type}
-                    onChange={this.onChange}
-                    required
-                />
-                <Form.Check
-                  type="radio"
-                  label="Standard"
+              <Form.Group as={Col} controlId="membership_type">
+    <Form.Label>Membership Type</Form.Label>
+    <Form.Control as="select"
                   name="membership_type"
-                  id="membership_type"
                   value={this.state.membership_type}
-                  onChange={this.onChange}
-                  required
-                />
-                <Form.Check
-                  type="radio"
-                  label="Premium"
-                  name="membership_type"
-                  id="membership_type"
-                  value={this.state.membership_type}
-                  onChange={this.onChange}
-                  required
-                />
-                </Col>
-                </Form.Group>
-    </fieldset>
+                  onChange = {this.onChange}>
+        <option>Choose...</option>
+        <option>Standard Membership</option>
+        <option>Basic Membership</option>
+        <option>Premium Membership</option>
+    </Form.Control>
+</Form.Group>
     </Form>
-              </div> */}
+              </div>
               <button
                 type="submit" id="check"
                 className="btn btn-lg btn-primary btn-block"
               >
                 Register!
               </button>
+              <AddRegisterModal
+            show={this.state.addModalShow}
+            onHide={addModalClose} />
             </form>
           </div>
         </div>

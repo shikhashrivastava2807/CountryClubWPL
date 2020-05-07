@@ -7,46 +7,72 @@ function DemoSlider() {
         setIndex(selectedIndex);
     };
 
+    const ImageHeight = 200;
+
     return (
         <Carousel activeIndex={index} onSelect={handleSelect}>
             <Carousel.Item>
-                <img
-                    className="d-block w-100"
-                    src="holder.js/800x400?text=First slide&bg=17a2b8"
-                    alt="First slide"
-                />
+            <img className="d-block w-100"
+                 src={require("../images/camp.jpg")}
+                 style={{height:610+'px'}} 
+                 mode='fit' /> 
                 <Carousel.Caption>
-                    <h3>First slide label</h3>
-                    <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-                </Carousel.Caption>
-            </Carousel.Item>
-            <Carousel.Item>
-                <img
-                    className="d-block w-100"
-                    src="holder.js/800x400?text=Second slide&bg=17a2b8"
-                    alt="Second slide"
-                />
-
-                <Carousel.Caption>
-                    <h3>Second slide label</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                </Carousel.Caption>
-            </Carousel.Item>
-            <Carousel.Item>
-                <img
-                    className="d-block w-100"
-                    src="holder.js/800x400?text=Third slide&bg=17a2b8"
-                    alt="Third slide"
-                />
-
-                <Carousel.Caption>
-                    <h3>Third slide label</h3>
+                    <h3>Mountain Adventures</h3>
                     <p>
-                        Praesent commodo cursus magna, vel scelerisque nisl consectetur.
+                    Explore the wonder of camping surrounded by the mountains
+                    </p>
+                </Carousel.Caption>
+            </Carousel.Item>
+            <Carousel.Item>
+                <img className="d-block w-100"
+                    src={require("../images/sfo.jpg")} 
+                    style={{height:610+'px'}} 
+                    mode='fit'/> 
+                 <Carousel.Caption>
+                    <h3>City Rush</h3>
+                    <p>
+                        Enjoy the busy life in the cities
+                    </p>
+                </Carousel.Caption>
+            </Carousel.Item>
+            <Carousel.Item>
+                <img className="d-block w-100"
+                    src={require("../images/golf.jpg")} 
+                    style={{height:610+'px'}} 
+                    mode='fit'/> 
+                 <Carousel.Caption>
+                    <h3>Golf Courses</h3>
+                    <p>
+                    Unwind after a long day with a game of golf
+                    </p>
+                </Carousel.Caption>
+            </Carousel.Item>
+            <Carousel.Item>
+                <img className="d-block w-100"
+                    src={require("../images/desert.jpg")} 
+                    style={{height:610+'px'}} 
+                    mode='fit'/> 
+                 <Carousel.Caption>
+                    <h3>Desert Adventures</h3>
+                    <p>
+                    Find adventure in the wonder of the desert with our club's retreats
+                    </p>
+                </Carousel.Caption>
+            </Carousel.Item>
+            <Carousel.Item>
+                <img className="d-block w-100"
+                    src={require("../images/beach.jpg")} 
+                    style={{height:610+'px'}} 
+                    mode='fit'/> 
+                 <Carousel.Caption>
+                    <h3>Beach Locations</h3>
+                    <p>
+                        Beautiful beaches... Lasting memories...
                     </p>
                 </Carousel.Caption>
             </Carousel.Item>
         </Carousel>
+        
     );
 }
 
