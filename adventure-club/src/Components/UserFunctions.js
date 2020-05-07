@@ -27,6 +27,7 @@ export const login = user => {
       localStorage.setItem('first_name',userToken.first_name);
       localStorage.setItem('last_name',userToken.last_name)
       localStorage.setItem('email',userToken.email)
+      localStorage.setItem('membership_type',userToken.membership_type)
       localStorage.setItem('isAdmin',userToken.isAdmin)
       return response.data
     })
@@ -49,16 +50,3 @@ export const getProfile = user => {
     })
 }
 
-export const getUserdetails= user => {
-  return axios
-    .get('http://localhost:3000/users/userdetails', {
-      //headers: { Authorization: ` ${this.getToken()}` }
-    })
-    .then(response => {
-      console.log("Hello")
-      return response.data
-    })
-    .catch(err => {
-      console.log(err)
-    })
-}
