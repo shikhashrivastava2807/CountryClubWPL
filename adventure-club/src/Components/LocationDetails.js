@@ -1,6 +1,4 @@
 import React, {Component} from "react";
-import Table from 'react-bootstrap/Table'
-import { Check,X } from 'react-bootstrap-icons';
 import {Button} from "react-bootstrap";
 
 
@@ -14,11 +12,22 @@ export class LocationDetails extends Component {
 
     }
     render(){
+        const unSignedButton = (
+            <>
+            <p>To Book Activities</p>
+            <Button variant="primary" onClick={()=>this.setState({showModal:true})}>
+                Become A member
+            </Button>
+            </>
+        )
+        const signedInButton = (
+            <Button variant="primary">
+                View and Book Activities
+            </Button>
+        )
         return(
             <>
-                <Button variant="primary" onClick={()=>this.setState({showModal:true})}>
-                    View Activities
-                </Button>
+                {localStorage.first_name ? signedInButton : unSignedButton}
             </>
         );
 

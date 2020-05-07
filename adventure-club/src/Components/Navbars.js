@@ -1,8 +1,6 @@
 import React, { Component } from 'react'
 import { Link, withRouter } from 'react-router-dom'
-//import Profile from './Profile';
-import jwt_decode from 'jwt-decode'
-import { Form, Button, FormControl, Dropdown } from "react-bootstrap";
+import { Form, Button, Dropdown } from "react-bootstrap";
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 
@@ -138,7 +136,7 @@ class HomePage extends Component {
               </Link>
             </li>
           </ul>
-          {localStorage.first_name ? ((localStorage.isAdmin === "True") ? adminLink : userLink) : loginRegLink}
+          {localStorage.first_name ? ((localStorage.isAdmin === "true") ? adminLink : userLink) : loginRegLink}
           {console.log(localStorage.isAdmin)}
         </div>
       </nav>

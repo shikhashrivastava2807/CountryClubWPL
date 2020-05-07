@@ -1,7 +1,5 @@
 import React, { Component } from 'react'
 import { register } from './UserFunctions'
-import $ from 'jquery'
-import { Row, Col, Form, Dropdown } from "react-bootstrap";
 
 class Register extends Component {
   constructor() {
