@@ -46,8 +46,17 @@ function UserFav() {
     fetch('http://localhost:3000/fav/'+userid, { method: "get" }).then((response) => {
       return response.json();
     }).then((user_fav)=>{
-        delete user_fav._id;
-        console.log(Object.keys(user_fav)[0]);
+      if(user_fav==null){
+        fetch('http://localhost:3000/fav/', {
+          method: "post",
+          headers: {
+            "Content-Type": "application/json; charset=utf-8"
+          },
+          body: JSON.stringify({"_id":userid})
+        });
+        user_fav={};
+      }
+      else delete user_fav._id;
         return fetch('http://localhost:3000/clubs/', { method: "get" }).then((response) => {
             return response.json();
             }).then((data) => {
