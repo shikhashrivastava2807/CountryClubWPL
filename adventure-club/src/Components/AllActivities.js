@@ -1,6 +1,7 @@
 import React from 'react';
 import MaterialTable from 'material-table';
 import FavoriteIcon from '@material-ui/icons/Favorite';
+import {Modal, Button, Form} from 'react-bootstrap';
 import ConfirmationNumberIcon from '@material-ui/icons/ConfirmationNumber';
 function AllActivities() {
   var info = [];
@@ -12,14 +13,68 @@ function AllActivities() {
     1:"Yes",
     0:"No"
   }
-  const [state, setState] = React.useState({
-    columns: columns,
-    data: info
-  });
   var current_ClubID = window.location.pathname.split('/');
   current_ClubID = current_ClubID[current_ClubID.length-1];
   var userid = localStorage.getItem('email');
   var is_admin = localStorage.getItem('isAdmin');
+  const [state, setState] = React.useState({
+    columns: columns,
+    data: info
+  });
+  const [show, setShow] = React.useState(false);
+
+  const [bookActivity, setActivity] = React.useState(0);
+  const dateInput = React.useRef(null)
+  const handleClose = () => setShow(false);
+  
+  const handleCloseSubmit = () =>{
+    // console.log(bookActivity);
+    // console.log(dateInput.current.value);
+    var param = bookActivity.id.split('-');
+    var club_id = param[0], activity_index = param[1], bookdate = dateInput.current.value;
+    // console.log(activity_index)
+    fetch('http://localhost:3000/book/', {
+            method: "post",
+            headers: {
+                "Content-Type": "application/json; charset=utf-8"
+            },
+            body: JSON.stringify({
+              "clubid":club_id,
+              "activityid":activity_index,
+              "date": bookdate,
+              "status": 1
+            })
+          }).then((response)=>{
+            return response.json()
+          }).then((response)=>{
+            if(response.length>0){
+              alert("Date not available!");
+              return response;
+            }
+            else{
+                fetch('http://localhost:3000/booking/', {
+                  method: "post",
+                  headers: {
+                      "Content-Type": "application/json; charset=utf-8"
+                  },
+                  body: JSON.stringify({
+                    "userid": userid,
+                    "clubid":club_id,
+                    "activityid":activity_index,
+                    "date": bookdate,
+                    "status": 1
+                  })
+                })
+            }
+          })
+    setShow(false);
+  }
+
+  const handleShow = (data) => {
+    setActivity(data);
+    setShow(true);
+  }
+  
   // console.log("admin status:"+is_admin);
 
 
@@ -162,7 +217,7 @@ function AllActivities() {
             disabled: rowData.booking_needed == "0",
             onClick: (event, oldData) => 
             new Promise((resolve) => {
-              console.log(FavoriteIcon);
+              // console.log(FavoriteIcon);
               event.button = 1;
               setTimeout(() => {
                 resolve();
@@ -170,8 +225,10 @@ function AllActivities() {
                   const data = [...prevState.data];
                   // console.log(prevState);
                   // console.log(prevState.data[prevState.data.indexOf(oldData)]);
-                  data[data.indexOf(oldData)].fav_flag = 1;
-                  add_fav(prevState.data[prevState.data.indexOf(oldData)].id);
+                  // data[data.indexOf(oldData)].fav_flag = 1;
+                  handleShow(data[data.indexOf(oldData)]);
+                  // add_fav(prevState.data[prevState.data.indexOf(oldData)].id);
+                  // alert("You want to add a new row")
                   // data.splice(data.indexOf(oldData), 1);
                   return { ...prevState, data };
                 });
@@ -184,6 +241,34 @@ function AllActivities() {
           filtering: true
         }}
       />
+      {/* Modal */}
+
+
+      <Modal show={show} onHide={handleClose} animation={false}>
+        <Modal.Header closeButton>
+          <Modal.Title>Confirm Date</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+        <Form>
+          <Form.Group controlId="date">
+            <Form.Label>Enter date</Form.Label>
+            <Form.Control type="date" placeholder="Enter date" ref={dateInput}/>
+            <Form.Text className="text-muted">
+              Select date to check availability!
+            </Form.Text>
+          </Form.Group>
+          <Button variant="primary" onClick={handleCloseSubmit}>
+            Confirm Booking!
+          </Button>
+        </Form>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Close
+          </Button>
+          
+        </Modal.Footer>
+      </Modal>
       </div>
     );
 

@@ -27,7 +27,7 @@ function App() {
             <Route path="/" component={HomePage} exact/>
             <Route path="/MembershipPlans" component={MembershipPlans} exact/>
             <Route path="/Activities/:clubId" component={AllActivities} exact/>
-            <Route path="/Activities/" component={AllActivities} exact/>
+            <Route path="/Activities" component={AllActivities} exact/>
             <Route path="/register" component={Register} exact/>
             <Route path="/login" component={Login} exact/>
             <Route path="/profile" component={Profile} exact/>            
