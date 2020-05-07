@@ -17,12 +17,12 @@ export class AddLoginModal extends Component {
     >
       <Modal.Header closeButton>
         <Modal.Title id="contained-modal-title-vcenter">
-          Alert
+          Login Error
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
             <div className="container">
-                Please enter Email Address and Password
+                {this.props.errorMessage}
             </div>
       </Modal.Body>
       <Modal.Footer>

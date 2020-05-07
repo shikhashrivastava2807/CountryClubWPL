@@ -16,7 +16,8 @@ class Register extends Component {
             membership_type: '',
             isAdmin: false,
             errors: {},
-            addModalShow: false
+            addModalShow: false,
+            errorMessage: ''
         }
 
         this.onChange = this.onChange.bind(this)
@@ -44,7 +45,7 @@ class Register extends Component {
             if (!i.value) allAreFilled = false;
         })
         if(!allAreFilled) {
-            this.setState({addModalShow: true})
+            this.setState({addModalShow: true, errorMessage:"Kindly fill all the fields!"})
         }
         else{
             const newUser = {
@@ -57,7 +58,11 @@ class Register extends Component {
             }
 
             register(newUser).then(res => {
-                this.props.history.push(`/login`)
+                if(res.error){
+                    this.setState({addModalShow: true, errorMessage:res.error+'!'})
+                }else{
+                    this.props.history.push(`/login`)
+                }
             })
         }
     }
@@ -173,7 +178,9 @@ class Register extends Component {
                                 </button>
                                 <AddRegisterModal
                                     show={this.state.addModalShow}
-                                    onHide={addModalClose} />
+                                    onHide={addModalClose}
+                                    message={this.state.errorMessage}
+                                />
                             </form>
                         </div>
                     </div>
