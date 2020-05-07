@@ -91,10 +91,11 @@ export class AddNewLocation extends Component {
                                                   name="club_type"
                                                   value={this.state.club_type}
                                                   onChange = {this.onChange}>
-                                        <option >Choose...</option>
+                                        <option>Desert</option>
                                         <option>Beach</option>
                                         <option>Mountains</option>
                                         <option>City</option>
+                                        <option>Jungle</option>
                                     </Form.Control>
                                 </Form.Group>
                             </Form.Row>

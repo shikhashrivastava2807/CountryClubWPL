@@ -9,7 +9,10 @@ export class LocationDetails extends Component {
     constructor() {
         super()
         this.state = {
-            clubsDetails : {}
+            clubsDetails : {},
+            imagesPath1:'',
+            imagesPath2:'',
+            imagesPath3:''
         }
 
     }
@@ -26,6 +29,11 @@ export class LocationDetails extends Component {
             .then(response => {
                 const data = response.data;
                 this.setState({clubsDetails: data})
+                this.setState({imagePath1: data.imagesPath[0]});
+                this.setState({imagePath2: data.imagesPath[1]});
+                this.setState({imagePath3: data.imagesPath[2]});
+                console.log(this.state.clubsDetails.imagesPath[0])
+
             })
             .catch(err => {
                 console.log(err)
@@ -50,47 +58,45 @@ export class LocationDetails extends Component {
                 </Button>
             </Link>
         )
+        if (!this.state.clubsDetails.club_name) {
+            return <span>Loading...</span>;
+        }
         return(
             <>
                 <Carousel>
                         <Carousel.Item>
                             <img className="d-block w-100"
-                                 src={require("../../images/florida.jpg")}
+                                 src={require("../../images/"+this.state.clubsDetails.imagesPath[0])}
                                  style={{height:610+'px'}}
                                  mode='fit' />
                             <Carousel.Caption>
-                                <h3>{this.state.clubsDetails.club_name}{this.state.clubsDetails.state}</h3>
-                                <p>
-                                    {this.state.clubsDetails.description}
-                                </p>
+                                <h4>{this.state.clubsDetails.club_name},{this.state.clubsDetails.State}
+                                </h4>
                             </Carousel.Caption>
                         </Carousel.Item>
                     <Carousel.Item>
                             <img className="d-block w-100"
-                                 src={require("../../images/camp.jpg")}
+                                 src={require("../../images/"+this.state.clubsDetails.imagesPath[1])}
                                  style={{height:610+'px'}}
                                  mode='fit' />
                             <Carousel.Caption>
-                                <h3>{this.state.clubsDetails.club_name}{this.state.clubsDetails.state}</h3>
-                                <p>
-                                    {this.state.clubsDetails.description}
-                                </p>
+                                <h4>{this.state.clubsDetails.club_name},{this.state.clubsDetails.State}</h4>
                             </Carousel.Caption>
                     </Carousel.Item>
                     <Carousel.Item>
                             <img className="d-block w-100"
-                                 src={require("../../images/camp.jpg")}
+                                 src={require("../../images/"+this.state.clubsDetails.imagesPath[2])}
                                  style={{height:610+'px'}}
                                  mode='fit' />
                             <Carousel.Caption>
-                                <h3>Mountain Adventures</h3>
-                                <p>
-                                    Explore the wonder of camping surrounded by the mountains
-                                </p>
+                                <h4>{this.state.clubsDetails.club_name},{this.state.clubsDetails.State}</h4>
                             </Carousel.Caption>
                     </Carousel.Item>
                 </Carousel>
                 <div className='m-4'>
+                    <p>
+                        {this.state.clubsDetails.description}
+                    </p>
                     {localStorage.first_name ? signedInButton : unSignedButton}
                 </div>
             </>

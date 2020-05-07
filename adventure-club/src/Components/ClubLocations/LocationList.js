@@ -63,16 +63,15 @@ export class LocationList extends Component {
     render() {
         let editModalClose = () => this.setState({showEditModal:false}) ;
         let deleteModalClose = () => this.setState({showDeleteModal:false}) ;
-        const image = require('../../images/florida.jpg');
         const classes = this.useStyles;
         const UserLocationsView = (
             <div className={classes.root}>
                 <GridList cellHeight={250} className={classes.gridList} cols={3}>
                     {this.state.clubsList.map((tile) => (
                         <GridListTile key={tile.club_name}>
-                            <img src={image} alt={tile.club_name} />
+                            <img src={require('../../images/'+tile.imagesPath[0])} alt={tile.club_name}/>
                             <GridListTileBar
-                                title={tile.club_name+','+tile.state}
+                                title={tile.club_name+','+tile.State}
                                 subtitle={<span>Type: {tile.club_type}</span>}
                                 actionIcon={
                                     <>
@@ -96,7 +95,7 @@ export class LocationList extends Component {
                 <GridList cellHeight={250} className={classes.gridList} cols={3}>
                     {this.state.clubsList.map((tile) => (
                         <GridListTile key={tile.club_name}>
-                            <img src={image} alt={tile.club_name} />
+                            <img src={require('../../images/'+tile.imagesPath[0])} alt={tile.club_name} />
                             <GridListTileBar
                                 title={tile.club_name+','+tile.State}
                                 subtitle={<span>Type: {tile.club_type}</span>}
