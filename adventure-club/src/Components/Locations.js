@@ -20,11 +20,7 @@ export class Locations extends Component{
                      <span className='p-2'><PlusCircleFill/></span><span>Add New Locations</span>
                  </Button>
          )
-        const showClub = (
-            <p>
-                Clubs list
-            </p>
-        )
+        const showClub = (<></>)
         return(
             <>
                 <AddNewLocation show={this.state.showModal} onHide={addModalClose}/>
