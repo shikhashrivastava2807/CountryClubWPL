@@ -17,12 +17,12 @@ function UserFav() {
     columns: columns,
     data: info
   });
-
+  var userid = localStorage.getItem('email');
   const delete_row = (id)=>{
     // console.log(id.split('-'));
     var param = id.split('-');
     var club_id = param[0], activity_index = param[1];
-    fetch('http://localhost:3000/fav/'+'userid', { method: "get" }).then((response) => {
+    fetch('http://localhost:3000/fav/'+userid, { method: "get" }).then((response) => {
       return response.json();
      }).then((user_fav)=>{
         delete user_fav._id;
@@ -30,7 +30,7 @@ function UserFav() {
         return user_fav;
         }).then((user_fav)=>{
         console.log(user_fav);
-        return fetch('http://localhost:3000/fav/'+'userid', {
+        return fetch('http://localhost:3000/fav/'+userid, {
                     method: "put",
                     headers: {
                         "Content-Type": "application/json; charset=utf-8"
@@ -43,7 +43,7 @@ function UserFav() {
 
   React.useEffect(()=>{
     
-    fetch('http://localhost:3000/fav/'+'userid', { method: "get" }).then((response) => {
+    fetch('http://localhost:3000/fav/'+userid, { method: "get" }).then((response) => {
       return response.json();
     }).then((user_fav)=>{
         delete user_fav._id;
