@@ -2,6 +2,7 @@ import React, {Component} from "react";
 import {Button} from "react-bootstrap";
 import {Link} from "react-router-dom";
 import axios from "axios";
+import Carousel from "react-bootstrap/Carousel";
 
 
 export class LocationDetails extends Component {
@@ -33,9 +34,8 @@ export class LocationDetails extends Component {
     render(){
         const unSignedButton = (
             <>
-                <p>To Book Aminities</p>
-                <Button variant="primary" href="/register">
-                    Become A member
+                <Button variant="info" href="/register">
+                    Not a member yet? Register Now!
                 </Button>
             </>
         )
@@ -52,9 +52,47 @@ export class LocationDetails extends Component {
         )
         return(
             <>
-                {localStorage.first_name ? signedInButton : unSignedButton}
-                <p>{this.state.clubsDetails.club_name}</p>
-
+                <Carousel>
+                        <Carousel.Item>
+                            <img className="d-block w-100"
+                                 src={require("../images/florida.jpg")}
+                                 style={{height:610+'px'}}
+                                 mode='fit' />
+                            <Carousel.Caption>
+                                <h3>{this.state.clubsDetails.club_name}{this.state.clubsDetails.state}</h3>
+                                <p>
+                                    {this.state.clubsDetails.description}
+                                </p>
+                            </Carousel.Caption>
+                        </Carousel.Item>
+                    <Carousel.Item>
+                            <img className="d-block w-100"
+                                 src={require("../images/camp.jpg")}
+                                 style={{height:610+'px'}}
+                                 mode='fit' />
+                            <Carousel.Caption>
+                                <h3>{this.state.clubsDetails.club_name}{this.state.clubsDetails.state}</h3>
+                                <p>
+                                    {this.state.clubsDetails.description}
+                                </p>
+                            </Carousel.Caption>
+                    </Carousel.Item>
+                    <Carousel.Item>
+                            <img className="d-block w-100"
+                                 src={require("../images/camp.jpg")}
+                                 style={{height:610+'px'}}
+                                 mode='fit' />
+                            <Carousel.Caption>
+                                <h3>Mountain Adventures</h3>
+                                <p>
+                                    Explore the wonder of camping surrounded by the mountains
+                                </p>
+                            </Carousel.Caption>
+                    </Carousel.Item>
+                </Carousel>
+                <div className='m-4'>
+                    {localStorage.first_name ? signedInButton : unSignedButton}
+                </div>
             </>
         );
 

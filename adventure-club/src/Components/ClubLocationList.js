@@ -55,7 +55,7 @@ export class ClubLocationList extends Component {
 
     render() {
         let addModalClose = () => this.setState({showEditModal:false}) ;
-        const image = require('../assets/images/image-florida.jpg');
+        const image = require('../images/florida.jpg');
         const classes = this.useStyles;
         const UserLocationsView = (
             <div className={classes.root}>
