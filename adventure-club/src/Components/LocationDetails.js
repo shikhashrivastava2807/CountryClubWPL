@@ -44,9 +44,9 @@ export class LocationDetails extends Component {
         current_ClubID = current_ClubID[current_ClubID.length-1]
 
         const signedInButton = (
-            <Link to={'/Aminities/'+current_ClubID}>
+            <Link to={'/Amenitties/'+current_ClubID}>
                 <Button variant="primary" onClick={()=>this.setState({showModal:true})}>
-                    View Aminities
+                    View Amenitties
                 </Button>
             </Link>
         )

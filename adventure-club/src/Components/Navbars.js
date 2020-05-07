@@ -69,7 +69,7 @@ class HomePage extends Component {
       <Nav className="mr-auto">
           <Nav.Link href="/Locations">Club Locations</Nav.Link>
           <Nav.Link href="/MembershipPlans">Membership Plans</Nav.Link>
-          <Nav.Link href="/Aminities">Aminities</Nav.Link>
+          <Nav.Link href="/Amenitties">Amenitties</Nav.Link>
           <Nav.Link href="/UserDetails">Users</Nav.Link>
           </Nav>
 
