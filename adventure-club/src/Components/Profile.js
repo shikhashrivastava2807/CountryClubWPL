@@ -1,4 +1,13 @@
 import React, { Component } from 'react'
+import Table from 'react-bootstrap/Table'
+
+import BackgroundImage from '../images/golf.jpg';
+
+var sectionStyle = {
+   backgroundImage: `url(${BackgroundImage})`,
+   width: '100%',
+  height: '900px'
+}
 
 class Profile extends Component {
   constructor() {
@@ -25,33 +34,29 @@ class Profile extends Component {
 
   render() {
     return (
-      <div className="container">
-        <div className="jumbotron mt-5">
-          <div className="col-sm-8 mx-auto">
-            <h1 className="text-center">PROFILE</h1>
-          </div>
-          <table className="table col-md-6 mx-auto">
-            <tbody>
-              <tr>
-                <td>Fist Name</td>
-                <td>{this.state.first_name}</td>
-              </tr>
-              <tr>
-                <td>Last Name</td>
-                <td>{this.state.last_name}</td>
-              </tr>
-              <tr>
-                <td>Email</td>
-                <td>{localStorage.email}</td>
-              </tr>
-              <tr>
-                <td>Membership Type</td>
-                <td>{localStorage.membership_type}......{this.state.isAdmin}</td>
-              </tr>
-            </tbody>
-          </table>
+      
+      <div  style={sectionStyle}>
+        
+        <Table striped bordered variant="dark" className='m-5'>
+<thead>
+  <tr>
+    <th>First Name</th>
+    <th>Last Name</th>
+    <th>Email</th>
+    <th>Membership Type</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td>{localStorage.first_name}</td>
+    <td>{localStorage.last_name}</td>
+    <td>{localStorage.email}</td>
+    <td>{localStorage.membership_type}</td>
+  </tr>
+</tbody>
+</Table>
         </div>
-      </div>
+
 
     )
   }
