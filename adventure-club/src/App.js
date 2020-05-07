@@ -15,6 +15,8 @@ import Register from './Components/LoginRegistration/Register'
 import Profile from './Components/LoginRegistration/Profile'
 import UserFav from "./Components/UserFav";
 import Navbars from "./Components/Navbars"
+
+import UserBooking from "./Components/UserBooking"
 import UserDetails from "./Components/LoginRegistration/UserDetails"
 import {Locations} from "./Components/ClubLocations/Locations";
 import {LocationDetails} from "./Components/ClubLocations/LocationDetails";
@@ -31,6 +33,8 @@ function App() {
             <Route path="/register" component={Register} exact/>
             <Route path="/login" component={Login} exact/>
             <Route path="/profile" component={Profile} exact/>
+            
+            <Route path="/UserBooking" component={UserBooking} exact/>
             <Route path="/Favorite" component={UserFav} exact/>
             <Route path="/UserDetails" component={UserDetails} exact/>
             <Route path="/Locations" component={Locations} exact/>

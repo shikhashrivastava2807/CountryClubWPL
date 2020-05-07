@@ -57,6 +57,7 @@ class HomePage extends Component {
           <Dropdown.Menu>
                 <Dropdown.Item href="/profile">Profile</Dropdown.Item>
                 <Dropdown.Item href="/Favorite">Favorites</Dropdown.Item>
+                <Dropdown.Item href="/UserBooking">My Booking</Dropdown.Item>
                 <Dropdown.Item href="" onClick={this.logOut.bind(this)}>Logout</Dropdown.Item>
             </Dropdown.Menu>
             </Dropdown>
