@@ -8,7 +8,7 @@ import {
     Route,
 } from 'react-router-dom'
 import HomePage from "./Components/HomePage";
-import MembershipPlans from "./Components/MembershipPlans";
+import {MembershipPlans} from "./Components/MembershipPlans";
 import AllAmenities from "./Components/AllAmenities";
 import Login from './Components/LoginRegistration/Login'
 import Register from './Components/LoginRegistration/Register'
