@@ -127,18 +127,20 @@ class Register extends Component {
               <div className="form-group">
               <Form>
               <Form.Group as={Col} controlId="membership_type">
-    <Form.Label>Membership Type</Form.Label>
-    <Form.Control as="select"
+              <Form.Label>Membership Type</Form.Label>
+              <Form.Control as="select"
+                  id="membership_type"
                   name="membership_type"
                   value={this.state.membership_type}
-                  onChange = {this.onChange}>
-        <option>Choose...</option>
-        <option>Standard Membership</option>
-        <option>Basic Membership</option>
-        <option>Premium Membership</option>
-    </Form.Control>
-</Form.Group>
-    </Form>
+                  onChange = {this.onChange}
+                  required>
+                <option>Choose...</option>
+                <option>Standard Membership</option>
+                <option>Basic Membership</option>
+                <option>Premium Membership</option>
+              </Form.Control>
+            </Form.Group>
+          </Form>
               </div>
               <button
                 type="submit" id="check"

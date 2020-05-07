@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios'
-import {Table, Column, Cell} from 'fixed-data-table';
+import {Table} from 'react-bootstrap';
 
 class UserDetails extends Component {
   
@@ -37,8 +37,11 @@ class UserDetails extends Component {
     
     return(
         <>
-        <Table>  
-        </Table>
+         <Table>
+           <tbody>
+             {userdetails}
+           </tbody>
+         </Table>
         </>
     )
 

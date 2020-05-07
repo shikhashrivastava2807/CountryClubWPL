@@ -3,7 +3,7 @@ import React from "react";
 
 const ContactUs =  () => (
     <>  
-        <p style={{fontFamily:'Roboto'}}>
+        <p>
         <b>Contact Us</b>
         <br />
         Phone No : +1 1234567890
