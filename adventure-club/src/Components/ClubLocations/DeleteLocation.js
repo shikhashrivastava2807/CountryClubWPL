@@ -11,11 +11,9 @@ export class DeleteLocation extends Component {
 
     onSubmit = event => {
         const clubInfo = {
-            id: this.state.id,
             status: "0"
         };
-        editClub(clubInfo).then(res => {
-            console.log('onedit')
+        editClub(this.state.id,clubInfo).then(res => {
             this.props.onHide();
         });
     }
