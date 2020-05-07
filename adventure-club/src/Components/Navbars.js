@@ -47,6 +47,7 @@ class HomePage extends Component {
       <Navbar bg="dark" variant="dark" style={{width:100+'%'}}>
       <Nav className="mr-auto">
           <Nav.Link href="/Locations">Club Locations</Nav.Link>
+          <Nav.Link href="MembershipPlans">Membership Plans</Nav.Link>
       </Nav>
       <Form inline>
           <Dropdown>
