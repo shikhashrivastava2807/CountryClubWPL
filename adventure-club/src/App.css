@@ -36,4 +36,23 @@
     transform: rotate(360deg);
   }
 }
+.carousel-indicators {
+  margin-right: 20% !important;
+  margin-left: 20% !important;
+}
+.carousel-indicators .active {
+  height: 3px;
+  width: 30px;
+}
 
+.weakPassword {
+  color: darkred;
+}
+
+.mediumPassword {
+  color: darkgoldenrod;
+}
+
+.strongPassword {
+  color: darkgreen;
+}
