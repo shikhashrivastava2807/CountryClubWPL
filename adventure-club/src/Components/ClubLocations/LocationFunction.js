@@ -23,7 +23,7 @@ export const createNewClubs = newClub => {
             "name": "Spa",
             "category": "Recreational",
             "description": "Relaxes your mind",
-            "booking_needed": "1",
+            "booking_needed": "0",
             "status": 1
         },
         {
@@ -37,9 +37,16 @@ export const createNewClubs = newClub => {
             "name": "Badminton",
             "category": "Indoor",
             "description": "Great workout",
-            "booking_needed": "1",
+            "booking_needed": "0",
             "status": 1
-        }
+        },
+            {
+                "name": "Banquet Hall",
+                "category": "Party",
+                "description": "Host Your Party Here",
+                "booking_needed": "1",
+                "status": 1
+            }
     ]
         })
         .then(response => {
