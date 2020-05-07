@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 import { Link, withRouter } from 'react-router-dom'
-//import Profile from './Profile';
 import jwt_decode from 'jwt-decode'
-import { Form, Button, FormControl, Dropdown } from "react-bootstrap";
+import { Form, Button, FormControl, Dropdown,Col } from "react-bootstrap";
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
+import { PersonFill,BrightnessHighFill,LockFill } from 'react-bootstrap-icons';
 
 class HomePage extends Component {
   logOut(e) {
@@ -13,7 +13,6 @@ class HomePage extends Component {
     localStorage.removeItem('last_name')
     localStorage.removeItem('email')
     localStorage.removeItem('isAdmin')
-
     this.props.history.push(`/`)
   }
 
@@ -22,46 +21,32 @@ class HomePage extends Component {
     this.props.history.push(`/`)
   }
 
-  // constructor() {
-  //   super()
-  //   this.state = {
-  //     first_name: '',
-  //     last_name: '',
-  //     email: '',
-  //     errors: {}
-  //   }
-  // }
-
-  // componentDidMount() {
-  //   const token = localStorage.usertoken
-  //   const decoded = jwt_decode(token)
-  //   this.setState({
-  //     first_name: decoded.first_name,
-  //     // last_name: decoded.last_name,
-  //     // email: decoded.email
-  //   })
-  // }
-
-
   render() {
   
     console.log(localStorage.isAdmin)
     const loginRegLink = (
-      <Navbar bg="dark" variant="dark">
+      <Navbar bg="dark" variant="dark" style={{width:100+'%'}} >
       {/* <Navbar.Brand href="/">HomeLogo</Navbar.Brand> */}
+      <Col md={10}>
       <Nav className="mr-auto">
           <Nav.Link href="Locations">Club Locations</Nav.Link>
           <Nav.Link href="MembershipPlans">Membership Plans</Nav.Link>
       </Nav>
-      <div className = "float-right"> 
-      <Button variant="outline-info" href="login">Sign In</Button>
+      </Col>
+      <Col md={2}>
+      <div className = "float-right">  
+      <Button variant="outline-info" href="login" className = "float-right"  >
+      <LockFill color="white" size ={14}/>
+         Member Login</Button>
       </div>  
+      </Col>
+      
         </Navbar>
     )
 
     const userLink = (
       
-      <Navbar bg="dark" variant="dark">
+      <Navbar bg="dark" variant="dark" style={{width:100+'%'}}>
       <Nav className="mr-auto">
           <Nav.Link href="Locations">Club Locations</Nav.Link>
       </Nav>
@@ -81,67 +66,47 @@ class HomePage extends Component {
     )
 
     const adminLink = (
-      <Navbar bg="dark" variant="dark">
+      <Navbar bg="dark" variant="dark" style={{width:100+'%'}}>
       <Nav className="mr-auto">
+        
           <Nav.Link href="Locations">Club Locations</Nav.Link>
           <Nav.Link href="MembershipPlans">Membership Plans</Nav.Link>
           <Nav.Link href="Activities">Activities</Nav.Link>
           <Nav.Link href="UserDetails">Users</Nav.Link>
+        
           </Nav>
+        
           <Form inline>
           <Dropdown>
+           
             <Dropdown.Toggle variant="success" id="dropdown-basic">
-            Hi {localStorage.first_name}
+            <PersonFill  color="white" />
+             {localStorage.first_name}
             </Dropdown.Toggle>
           <Dropdown.Menu>
-                <Dropdown.Item href="/profile">Profile</Dropdown.Item>
                 <Dropdown.Item href="" onClick={this.logOut.bind(this)}>Logout</Dropdown.Item>
             </Dropdown.Menu>
             </Dropdown>
-            </Form>  
+            </Form> 
+           
         </Navbar>
     )
 
-    // const showNavBar = function(){
-    //   if(localStorage.first_name){
-    //     if(localStorage.isAdmin) {
-    //       return adminLink
-    //     }
-    //     return userLink
-    //   }
-    //   return loginRegLink
-    //   // return (localStorage.first_name ? (localStorage.isAdmin ? adminLink : userLink) : loginRegLink);
-    // }
 
     return (
-      <nav className="navbar navbar-expand-lg navbar-dark bg-dark rounded">
-        <button
-          className="navbar-toggler"
-          type="button"
-          data-toggle="collapse"
-          data-target="#navbarsExample10"
-          aria-controls="navbarsExample10"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span className="navbar-toggler-icon" />
-        </button>
-
-        <div
-          className="collapse navbar-collapse justify-content-md-center"
-          id="navbarsExample10"
-        >
-          <ul className="navbar-nav">
-            <li className="nav-item">
-              <Link to="/" className="nav-link">
-                Home
-              </Link>
-            </li>
-          </ul>
-          {localStorage.first_name ? ((localStorage.isAdmin === "True") ? adminLink : userLink) : loginRegLink}
-          {console.log(localStorage.isAdmin)}
+      <Navbar bg="dark" variant="dark">
+        <div>
+        <BrightnessHighFill color="white" />
         </div>
-      </nav>
+      <Col md={2}>
+      <Navbar.Brand href="/"> 
+      Comets Country Club</Navbar.Brand></Col>
+      <Col md={10}>
+      <Nav className="mr-auto">
+      {localStorage.first_name ? ((localStorage.isAdmin === "true") ? adminLink : userLink) : loginRegLink}  
+      </Nav>
+      </Col>
+      </Navbar>
     )
   }
 }

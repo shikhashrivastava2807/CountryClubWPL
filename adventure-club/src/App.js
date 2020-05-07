@@ -17,6 +17,7 @@ import Register from './Components/Register'
 import Profile from './Components/Profile'
 import UserFav from "./Components/UserFav";
 import Navbars from "./Components/Navbars"
+import UserDetails from "./Components/UserDetails"
 
 
 function App() {
@@ -31,7 +32,8 @@ function App() {
             <Route path="/register" component={Register} exact/>
             <Route path="/login" component={Login} exact/>
             <Route path="/profile" component={Profile} exact/>            
-            <Route path="/Favorite" component={UserFav} exact/>   
+            <Route path="/Favorite" component={UserFav} exact/> 
+            <Route path="/UserDetails" component={UserDetails} exact/>   
         </div>
     </Router>
   );
