@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import Table from 'react-bootstrap/Table'
 
-import BackgroundImage from '../images/golf.jpg';
+import BackgroundImage from '../../images/golf.jpg';
 
 var sectionStyle = {
    backgroundImage: `url(${BackgroundImage})`,

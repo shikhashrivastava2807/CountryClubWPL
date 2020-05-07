@@ -75,7 +75,7 @@ function UserFav() {
             }
             columns = [
                 // {title: 'id', field:'id'},
-                { title: 'Activity', field: 'name' , filtering: false},
+                { title: 'Amenity', field: 'name' , filtering: false},
                 { title: 'Description', field: 'description', filtering: false },
                 { title: 'Category', field: 'category' },
                 { title: 'Booking required', field: 'booking_needed' , lookup: booking_lookup},
@@ -101,7 +101,7 @@ function UserFav() {
     <div>
       <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"></link>
     <MaterialTable
-      title="Your Favorite Activities!!"
+      title="Your Favorite Amenities!!"
       columns={state.columns}
       data={state.data}
       actions={[

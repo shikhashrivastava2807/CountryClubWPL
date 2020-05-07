@@ -33,7 +33,7 @@ export class LocationDetails extends Component {
     render(){
         const unSignedButton = (
             <>
-                <p>To Book Activities</p>
+                <p>To Book Aminities</p>
                 <Button variant="primary" href="/register">
                     Become A member
                 </Button>
@@ -44,9 +44,9 @@ export class LocationDetails extends Component {
         current_ClubID = current_ClubID[current_ClubID.length-1]
 
         const signedInButton = (
-            <Link to={'/Activities/'+current_ClubID}>
+            <Link to={'/Aminities/'+current_ClubID}>
                 <Button variant="primary" onClick={()=>this.setState({showModal:true})}>
-                    View Activities
+                    View Aminities
                 </Button>
             </Link>
         )
