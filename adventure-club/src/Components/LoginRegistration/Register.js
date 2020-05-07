@@ -3,7 +3,6 @@ import { register } from './UserFunctions'
 import { Form } from "react-bootstrap";
 import {AddRegisterModal} from './AddRegisterModal';
 import $ from 'jquery';
-import ReactPasswordStrength from 'react-password-strength';
 
 
 class Register extends Component {
