@@ -11,35 +11,13 @@ class Login extends Component {
       email: '',
       password: '',
       errors: {},
-      addModalShow: false
+      addModalShow: false,
+      errorMessage:''
     }
 
     this.onChange = this.onChange.bind(this)
     this.onSubmit = this.onSubmit.bind(this)
   }
-
-
-
-  // onChange(e) {
-  //   this.setState({ [e.target.name]: e.target.value })
-  // }
-  // onSubmit(e) {
-  //   e.preventDefault()
-
-  //   const user = {
-  //     email: this.state.email,
-  //     password: this.state.password
-  //   }
-
-  //   login(user).then(res => {
-  //     if (res) {
-  //       this.props.history.push(`/`)
-  //     } else {
-  //       this.props.history.push(`/error`)
-  //     }
-  //   })
-  // }
-
   
   validate() {
     let allAreFilled = true;
@@ -61,8 +39,7 @@ class Login extends Component {
       if (!i.value) allAreFilled = false;
     })
     if(!allAreFilled) {
-      // alert('Please enter email address and password');
-      this.setState({addModalShow: true})
+      this.setState({addModalShow: true, errorMessage:"Please enter Email Address and Password!"})
     }
     else{
       const user = {
@@ -71,16 +48,13 @@ class Login extends Component {
            }
 
            login(user).then(res => {
-            if (res) {
-               this.props.history.push(`/`)
-             } else {
-               //this.props.history.push(`/error`)
-             
-               alert('Invalid username/password');
-             }
-      })
-  
-     
+            if (res.isAxiosError && res.response && res.response.status === 401) {
+              this.setState({addModalShow: true, errorMessage:"Please enter correct Username/Password."})
+            } else {
+              this.props.history.push(`/`)
+           }
+           })
+
       }
     }
   
@@ -127,10 +101,11 @@ class Login extends Component {
               </button>
               <AddLoginModal
             show={this.state.addModalShow}
-            onHide={addModalClose} />
+            onHide={addModalClose}
+            errorMessage={this.state.errorMessage} />
             </form>
             <div className="p-2">
-            <Button variant="outline-info" href="register">Not a member? Register now</Button>
+            <Button variant="outline-info" href="/register">Not a member? Register now</Button>
           
             </div>
 

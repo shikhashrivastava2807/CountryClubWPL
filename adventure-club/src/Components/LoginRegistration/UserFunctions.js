@@ -12,8 +12,12 @@ export const register = newUser => {
       isAdmin: false
     })
     .then(response => {
-      console.log('Registered')
+      console.log(response)
+        return response.data;
     })
+      .catch(err => {
+          console.log(err)
+      })
 }
 
 export const login = user => {
@@ -32,7 +36,7 @@ export const login = user => {
       return response.data
     })
     .catch(err => {
-      console.log(err)
+      return err;
     })
 }
 

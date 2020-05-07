@@ -17,12 +17,12 @@ export class AddRegisterModal extends Component {
     >
       <Modal.Header closeButton>
         <Modal.Title id="contained-modal-title-vcenter">
-          Alert
+          Registration Error
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
             <div className="container">
-                Kindly fill all fields
+                {this.props.message}
             </div>
       </Modal.Body>
       <Modal.Footer>

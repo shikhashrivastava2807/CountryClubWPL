@@ -13,7 +13,7 @@ export class MembershipPlans extends Component {
         };
         const RegisterButton = (
             <div className = 'm-3'>
-                <Button variant="info" href="register">Not a member yet? Register now!</Button>
+                <Button variant="info" href="/register">Not a member yet? Register now!</Button>
             </div>
         );
         return(

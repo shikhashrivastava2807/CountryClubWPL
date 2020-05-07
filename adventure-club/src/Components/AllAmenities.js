@@ -13,8 +13,11 @@ function AllAmenities() {
         1:"Yes",
         0:"No"
     }
-    var current_ClubID = window.location.pathname.split('/');
-    current_ClubID = current_ClubID[current_ClubID.length-1];
+    var current_ClubID = '';
+    if(window.location.pathname.split('/')>2){
+        current_ClubID = window.location.pathname.split('/')
+        current_ClubID = current_ClubID[current_ClubID.length-1];
+    }
     var userid = localStorage.getItem('email');
     var is_admin = localStorage.getItem('isAdmin');
     const [state, setState] = React.useState({
@@ -83,7 +86,12 @@ function AllAmenities() {
         fetch('http://localhost:3000/fav/'+userid, { method: "get" }).then((response) => {
             return response.json();
         }).then((user_fav)=>{
-            fetch('http://localhost:3000/clubs/'+current_ClubID, { method: "get" }).then((response) => {
+            let url = 'http://localhost:3000/clubs/';
+
+            if(current_ClubID.length>0) {
+                url += current_ClubID;
+            }
+            fetch(url, { method: "get" }).then((response) => {
                 return response.json();
             }).then((data) => {
                 if(user_fav==null){
@@ -97,30 +105,58 @@ function AllAmenities() {
                     user_fav = {};
                 }
                 var i, j, club_name, club_objID, val;
-                club_name = data.club_name;
-                club_objID = data._id;
-                lookup[club_objID] = club_name;
-                for(j=0;j<data.activities.length;j++){
-                    val = 0
-                    if(Object.keys(user_fav).includes(data._id)){
-                        if (user_fav[data._id].includes(j.toString())){
-                            val = 1;
+                if(data.length) {
+                   for(i=0;i<data.length;i++){
+                       club_name = data[i].club_name;
+                       club_objID = data[i]._id;
+                       lookup[club_objID] = club_name;
+                       for(j=0;j<data[i].activities.length;j++){
+                           val = 0
+                           if(Object.keys(user_fav).includes(data._id)){
+                               if (user_fav[data._id].includes(j.toString())){
+                                   val = 1;
+                               }
+                           }
+
+                           if(data[i].status=='1' && data[i].activities[j].status==1){
+                               info.push({
+                                   id: club_objID+"-"+j,
+                                   name: data[i].activities[j].name,
+                                   description: data[i].activities[j].description,
+                                   category: data[i].activities[j].category,
+                                   booking_needed: data[i].activities[j].booking_needed,
+                                   club_name: club_objID,
+                                   fav_flag: val
+                               });
+                               // console.log(data._id, data.activities[j].name);
+                           }
+                   }
+                }
+                }else{
+                    club_name = data.club_name;
+                    club_objID = data._id;
+                    lookup[club_objID] = club_name;
+                    for(j=0;j<data.activities.length;j++){
+                        val = 0
+                        if(Object.keys(user_fav).includes(data._id)){
+                            if (user_fav[data._id].includes(j.toString())){
+                                val = 1;
+                            }
                         }
-                    }
 
-                    if(data.status=='1' && data.activities[j].status==1){
-                        info.push({
-                            id: club_objID+"-"+j,
-                            name: data.activities[j].name,
-                            description: data.activities[j].description,
-                            category: data.activities[j].category,
-                            booking_needed: data.activities[j].booking_needed,
-                            club_name: club_objID,
-                            fav_flag: val
-                        });
-                        // console.log(data._id, data.activities[j].name);
-                    }
-
+                        if(data.status=='1' && data.activities[j].status==1){
+                            info.push({
+                                id: club_objID+"-"+j,
+                                name: data.activities[j].name,
+                                description: data.activities[j].description,
+                                category: data.activities[j].category,
+                                booking_needed: data.activities[j].booking_needed,
+                                club_name: club_objID,
+                                fav_flag: val
+                            });
+                            // console.log(data._id, data.activities[j].name);
+                        }
+                }
                 }
 
                 columns = [
