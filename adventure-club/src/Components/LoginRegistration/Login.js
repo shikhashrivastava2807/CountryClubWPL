@@ -130,7 +130,7 @@ class Login extends Component {
             onHide={addModalClose} />
             </form>
             <div className="p-2">
-            <Button variant="outline-info" href="register">Not a member? Register now</Button>
+            <Button variant="outline-info" href="/register">Not a member? Register now</Button>
           
             </div>
 
