@@ -9,6 +9,7 @@ import InfoIcon from '@material-ui/icons/Info';
 import {PencilSquare,TrashFill} from "react-bootstrap-icons";
 import {Link} from "react-router-dom";
 import {EditLocationDetails} from "./EditLocationDetails";
+import {DeleteLocation} from "./DeleteLocation";
 
 
 
@@ -17,7 +18,8 @@ export class ClubLocationList extends Component {
         super()
         this.state = {
             clubsList : [],
-            showEditModal:false
+            showEditModal:false,
+            showDeleteModal:false
         }
     }
     async componentDidMount() {
@@ -30,7 +32,12 @@ export class ClubLocationList extends Component {
                 //headers: { Authorization: ` ${this.getToken()}` }
             })
             .then(response => {
-                const data = response.data;
+                const data = [];
+                for(let i = 0; i<response.data.length; i++){
+                    if(response.data[i].status === "1"){
+                        data.push(response.data[i])
+                    }
+                }
                 this.setState({clubsList: data})
             })
             .catch(err => {
@@ -54,7 +61,8 @@ export class ClubLocationList extends Component {
 
 
     render() {
-        let addModalClose = () => this.setState({showEditModal:false}) ;
+        let editModalClose = () => this.setState({showEditModal:false}) ;
+        let deleteModalClose = () => this.setState({showDeleteModal:false}) ;
         const image = require('../images/florida.jpg');
         const classes = this.useStyles;
         const UserLocationsView = (
@@ -68,7 +76,7 @@ export class ClubLocationList extends Component {
                                 subtitle={<span>Type: {tile.club_type}</span>}
                                 actionIcon={
                                     <>
-                                        <Link to={`/Locations/details/${tile._id}`}>
+                                        <Link to={`/Locations/${tile._id}`}>
                                             <IconButton aria-label={`info about ${tile.club_name}`} style={{color:'rgba(255, 255, 255, 0.6)'}}>
                                                 <InfoIcon />
                                             </IconButton>
@@ -111,7 +119,11 @@ export class ClubLocationList extends Component {
                                             })} aria-label={`info about ${tile.club_name}`} style={{color:'rgba(255, 255, 255, 0.6)'}}>
                                                 <PencilSquare/>
                                             </IconButton>
-                                            <IconButton aria-label={`info about ${tile.club_name}`} style={{color:'rgba(255, 255, 255, 0.6)'}}>
+                                            <IconButton onClick={()=>this.setState({showDeleteModal:true,
+                                                id:tile._id,
+                                                club_name:tile.club_name
+
+                                            })} aria-label={`info about ${tile.club_name}`} style={{color:'rgba(255, 255, 255, 0.6)'}}>
                                                 <TrashFill/>
                                             </IconButton>
                                     </>
@@ -122,7 +134,7 @@ export class ClubLocationList extends Component {
                         ))}
                 </GridList>
                 <EditLocationDetails show={this.state.showEditModal}
-                                     onHide={addModalClose}
+                                     onHide={editModalClose}
                                      id = {this.state.id}
                                      club_name={this.state.club_name}
                                      club_type={this.state.club_type}
@@ -135,6 +147,11 @@ export class ClubLocationList extends Component {
                                      images_path2={this.state.images_path2}
                                      images_path3={this.state.images_path3}
                                      description={this.state.description}
+                                     key={this.state.club_name}
+                />
+                <DeleteLocation show={this.state.showDeleteModal}
+                                     onHide={deleteModalClose}
+                                     id = {this.state.id}
                                      key={this.state.club_name}
                 />
 

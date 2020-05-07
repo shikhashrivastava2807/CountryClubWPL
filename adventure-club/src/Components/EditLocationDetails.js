@@ -67,7 +67,7 @@ export class EditLocationDetails extends Component {
                 >
                     <Modal.Header closeButton>
                         <Modal.Title id="contained-modal-title-vcenter">
-                            Add New Club Locations
+                            Edit Club Locations
                         </Modal.Title>
                     </Modal.Header>
                     <Modal.Body>

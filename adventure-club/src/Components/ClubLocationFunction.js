@@ -49,22 +49,7 @@ export const createNewClubs = newClub => {
 
 export const editClub = clubInfo => {
     return axios
-        .put('http://localhost:3000/clubs/'+ clubInfo.id, {
-
-            club_name: clubInfo.club_name,
-            club_type: clubInfo.club_type,
-            address_line1: clubInfo.address_line1,
-            address_line2: clubInfo.address_line2,
-            zip: clubInfo.zip,
-            City: clubInfo.City,
-            State: clubInfo.State, imagesPath : [
-                clubInfo.imagesPath[0],
-                clubInfo.imagesPath[1],
-                clubInfo.imagesPath[2]
-            ],
-            status: "1",
-            description: clubInfo.description,
-        })
+        .put('http://localhost:3000/clubs/'+ clubInfo.id, clubInfo)
         .then(response => {
             console.log('Club Created')
         })

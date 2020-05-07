@@ -7,7 +7,6 @@ function DemoSlider() {
         setIndex(selectedIndex);
     };
 
-    const ImageHeight = 200;
 
     return (
         <Carousel activeIndex={index} onSelect={handleSelect}>
