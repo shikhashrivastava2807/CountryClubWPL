@@ -1,7 +1,10 @@
 import React, {Component} from "react";
-import {Button} from "react-bootstrap";
+import {Button,Col} from "react-bootstrap";
 import {AddNewLocation} from "./AddNewLocation"
 import {ClubLocationList} from "./ClubLocationList";
+import {PlusCircleFill} from "react-bootstrap-icons";
+
+
 
 export class Locations extends Component{
     constructor(props) {
@@ -12,13 +15,27 @@ export class Locations extends Component{
     render() {
 
          let addModalClose = () => this.setState({showModal:false}) ;
+         const addNewClub = (
+                 <Button className= 'float-right' variant="primary" onClick={()=>this.setState({showModal:true})}>
+                     <span className='p-2'><PlusCircleFill/></span><span>Add New Locations</span>
+                 </Button>
+         )
+        const showClub = (<></>)
         return(
             <>
-                <Button variant="primary" onClick={()=>this.setState({showModal:true})}>
-                    Add Locations
-                </Button>
                 <AddNewLocation show={this.state.showModal} onHide={addModalClose}/>
-                <ClubLocationList/>
+                    <div className="float-right m-4">
+                        <Col md={12}>
+                            <div>
+                            {(localStorage.isAdmin=== "true")?addNewClub:showClub}
+                            </div>
+                        </Col>
+                    </div>
+                    <div>
+                        <Col md={12}>
+                            <ClubLocationList/>
+                        </Col>
+                    </div>
             </>
             )
     }

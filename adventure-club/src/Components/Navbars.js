@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
-import { Link, withRouter } from 'react-router-dom'
-import jwt_decode from 'jwt-decode'
-import { Form, Button, FormControl, Dropdown,Col } from "react-bootstrap";
+import { withRouter } from 'react-router-dom'
+import { Form, Button, Dropdown,Col } from "react-bootstrap";
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import { PersonFill,BrightnessHighFill,LockFill } from 'react-bootstrap-icons';
@@ -26,7 +25,6 @@ class HomePage extends Component {
     console.log(localStorage.isAdmin)
     const loginRegLink = (
       <Navbar bg="dark" variant="dark" style={{width:100+'%'}} >
-      {/* <Navbar.Brand href="/">HomeLogo</Navbar.Brand> */}
       <Col md={10}>
       <Nav className="mr-auto">
           <Nav.Link href="Locations">Club Locations</Nav.Link>
@@ -34,13 +32,13 @@ class HomePage extends Component {
       </Nav>
       </Col>
       <Col md={2}>
-      <div className = "float-right">  
+      <div className = "float-right">
       <Button variant="outline-info" href="login" className = "float-right"  >
       <LockFill color="white" size ={14}/>
          Member Login</Button>
       </div>  
       </Col>
-      
+
         </Navbar>
     )
 
@@ -74,10 +72,10 @@ class HomePage extends Component {
           <Nav.Link href="Activities">Activities</Nav.Link>
           <Nav.Link href="UserDetails">Users</Nav.Link>
           </Nav>
-        
+
           <Form inline>
           <Dropdown>
-           
+
             <Dropdown.Toggle variant="success" id="dropdown-basic">
             <PersonFill  color="white" />
              {localStorage.first_name}
@@ -86,8 +84,8 @@ class HomePage extends Component {
                 <Dropdown.Item href="" onClick={this.logOut.bind(this)}>Logout</Dropdown.Item>
             </Dropdown.Menu>
             </Dropdown>
-            </Form> 
-           
+            </Form>
+
         </Navbar>
     )
 
@@ -98,11 +96,11 @@ class HomePage extends Component {
         <BrightnessHighFill color="white" />
         </div>
       <Col md={2}>
-      <Navbar.Brand href="/"> 
+      <Navbar.Brand href="/">
       Comets Country Club</Navbar.Brand></Col>
       <Col md={10}>
       <Nav className="mr-auto">
-      {localStorage.first_name ? ((localStorage.isAdmin === "true") ? adminLink : userLink) : loginRegLink}  
+      {localStorage.first_name ? ((localStorage.isAdmin === "true") ? adminLink : userLink) : loginRegLink}
       </Nav>
       </Col>
       </Navbar>

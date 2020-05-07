@@ -9,13 +9,14 @@ export const createNewClubs = newClub => {
         address_line1: newClub.address_line1,
         address_line2: newClub.address_line2,
         zip: newClub.zip,
-        City: newClub.city,
-        State: newClub.states,
+        City: newClub.City,
+        State: newClub.State,
         imagesPath : [
             newClub.imagesPath[0],
             newClub.imagesPath[1],
             newClub.imagesPath[2]
-    ],
+        ],
+            status: "1",
         description: newClub.description,
         activities: [
         {
@@ -40,6 +41,29 @@ export const createNewClubs = newClub => {
             "status": 1
         }
     ]
+        })
+        .then(response => {
+            console.log('Club Created')
+        })
+}
+
+export const editClub = clubInfo => {
+    return axios
+        .put('http://localhost:3000/clubs/'+ clubInfo.id, {
+
+            club_name: clubInfo.club_name,
+            club_type: clubInfo.club_type,
+            address_line1: clubInfo.address_line1,
+            address_line2: clubInfo.address_line2,
+            zip: clubInfo.zip,
+            City: clubInfo.City,
+            State: clubInfo.State, imagesPath : [
+                clubInfo.imagesPath[0],
+                clubInfo.imagesPath[1],
+                clubInfo.imagesPath[2]
+            ],
+            status: "1",
+            description: clubInfo.description,
         })
         .then(response => {
             console.log('Club Created')

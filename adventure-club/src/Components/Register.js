@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { register } from './UserFunctions'
-import $ from 'jquery'
-import { Row, Col, Form, Dropdown } from "react-bootstrap";
+import { Col, Form } from "react-bootstrap";
 import {AddRegisterModal} from './AddRegisterModal';
 
 
@@ -22,7 +21,7 @@ class Register extends Component {
     this.onChange = this.onChange.bind(this)
     this.onSubmit = this.onSubmit.bind(this)
   }
- 
+
 //using jquery to validate that all mandatory fields are filled
   validate() {
     let allAreFilled = true;
