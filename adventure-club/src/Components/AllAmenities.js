@@ -3,7 +3,7 @@ import MaterialTable from 'material-table';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import {Modal, Button, Form} from 'react-bootstrap';
 import ConfirmationNumberIcon from '@material-ui/icons/ConfirmationNumber';
-function AllAmenitties() {
+function AllAmenities() {
     var info = [];
     var columns;
     var lookup = {};
@@ -23,14 +23,14 @@ function AllAmenitties() {
     });
     const [show, setShow] = React.useState(false);
 
-    const [bookAmenitty, setAmenitty] = React.useState(0);
+    const [bookAmenity, setAmenity] = React.useState(0);
     const dateInput = React.useRef(null)
     const handleClose = () => setShow(false);
 
     const handleCloseSubmit = () =>{
-        // console.log(bookAmenitty);
+        // console.log(bookAmenity);
         // console.log(dateInput.current.value);
-        var param = bookAmenitty.id.split('-');
+        var param = bookAmenity.id.split('-');
         var club_id = param[0], activity_index = param[1], bookdate = dateInput.current.value;
         // console.log(activity_index)
         fetch('http://localhost:3000/book/', {
@@ -71,7 +71,7 @@ function AllAmenitties() {
     }
 
     const handleShow = (data) => {
-        setAmenitty(data);
+        setAmenity(data);
         setShow(true);
     }
 
@@ -126,7 +126,7 @@ function AllAmenitties() {
                 columns = [
                     // {title: 'id', field:'id'},
                     { title: 'fav', field: 'fav_flag', editable: 'never', hidden: true},
-                    { title: 'Amenitty', field: 'name' , filtering: false},
+                    { title: 'Amenity', field: 'name' , filtering: false},
                     { title: 'Description', field: 'description', filtering: false },
                     { title: 'Category', field: 'category' },
                     { title: 'Booking required', field: 'booking_needed' , lookup: booking_lookup},
@@ -182,7 +182,7 @@ function AllAmenitties() {
             <div>
                 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"></link>
                 <MaterialTable
-                    title="Amenitties information"
+                    title="Amenities information"
                     columns={state.columns}
                     data={state.data}
                     actions={[
@@ -409,4 +409,4 @@ function AllAmenitties() {
     }
 }
 
-export default AllAmenitties;
+export default AllAmenities;

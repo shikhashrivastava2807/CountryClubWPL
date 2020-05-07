@@ -44,9 +44,9 @@ export class LocationDetails extends Component {
         current_ClubID = current_ClubID[current_ClubID.length-1]
 
         const signedInButton = (
-            <Link to={'/Amenitties/'+current_ClubID}>
+            <Link to={'/Amenities/'+current_ClubID}>
                 <Button variant="primary" onClick={()=>this.setState({showModal:true})}>
-                    View Amenitties
+                    View Amenities
                 </Button>
             </Link>
         )
@@ -55,7 +55,7 @@ export class LocationDetails extends Component {
                 <Carousel>
                         <Carousel.Item>
                             <img className="d-block w-100"
-                                 src={require("../images/florida.jpg")}
+                                 src={require("../../images/florida.jpg")}
                                  style={{height:610+'px'}}
                                  mode='fit' />
                             <Carousel.Caption>
@@ -67,7 +67,7 @@ export class LocationDetails extends Component {
                         </Carousel.Item>
                     <Carousel.Item>
                             <img className="d-block w-100"
-                                 src={require("../images/camp.jpg")}
+                                 src={require("../../images/camp.jpg")}
                                  style={{height:610+'px'}}
                                  mode='fit' />
                             <Carousel.Caption>
@@ -79,7 +79,7 @@ export class LocationDetails extends Component {
                     </Carousel.Item>
                     <Carousel.Item>
                             <img className="d-block w-100"
-                                 src={require("../images/camp.jpg")}
+                                 src={require("../../images/camp.jpg")}
                                  style={{height:610+'px'}}
                                  mode='fit' />
                             <Carousel.Caption>

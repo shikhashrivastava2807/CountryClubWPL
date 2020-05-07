@@ -13,7 +13,7 @@ import {DeleteLocation} from "./DeleteLocation";
 
 
 
-export class ClubLocationList extends Component {
+export class LocationList extends Component {
     constructor() {
         super()
         this.state = {
@@ -63,7 +63,7 @@ export class ClubLocationList extends Component {
     render() {
         let editModalClose = () => this.setState({showEditModal:false}) ;
         let deleteModalClose = () => this.setState({showDeleteModal:false}) ;
-        const image = require('../images/florida.jpg');
+        const image = require('../../images/florida.jpg');
         const classes = this.useStyles;
         const UserLocationsView = (
             <div className={classes.root}>

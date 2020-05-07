@@ -2,7 +2,7 @@ import React from "react";
 import ContactUs from "./ContactUs";
 import DemoSlider from "./DemoSlider";
 import { Navbar } from "react-bootstrap";
-import ClubDetails from "./ClubDetails";
+import CountryClubDetails from "./CountryClubDetails";
 
 
 
@@ -11,7 +11,7 @@ function HomePage() {
             <>
                 <DemoSlider/>
                 <div className='m-5'>
-                <ClubDetails />
+                <CountryClubDetails />
                 </div>
                 <div>
                 <ContactUs/>

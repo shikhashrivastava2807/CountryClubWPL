@@ -1,7 +1,7 @@
 import React from "react";
 import { Card, CardDeck } from "react-bootstrap";
 
-const ClubDetails =  () => (
+const CountryClubDetails =  () => (
     <CardDeck>
   <Card>
     <Card.Img variant="top" src={require("../images/summer.jpg")} style={{height:250+'px'}} />
@@ -36,7 +36,7 @@ const ClubDetails =  () => (
 </CardDeck>
 );
 
-export default ClubDetails;
+export default CountryClubDetails;
 
 
 
