@@ -1,0 +1,12 @@
+[
+
+{
+    "first_name" : "John",
+    "last_name" : "Smith",
+    "email" : "john@gmail.com",
+    "password" : "John123!",
+    "membership_type" : "Standard Membership",
+    "isAdmin" : "false"
+  }
+  
+]
