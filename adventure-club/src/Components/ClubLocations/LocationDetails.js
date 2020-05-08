@@ -106,6 +106,16 @@ export class LocationDetails extends Component {
                                 <h4>{this.state.clubsDetails.club_name},{this.state.clubsDetails.State}</h4>
                             </Carousel.Caption>
                     </Carousel.Item>
+                    <Carousel.Item>
+                        <img className="d-block w-100"
+                             src={require('../../images/amenities.jpg')}
+                             style={{height:610+'px'}}
+                             mode='fit'
+                             alt={this.state.clubsDetails.club_name}/>
+                        <Carousel.Caption>
+                            <h4>{this.state.clubsDetails.club_name},{this.state.clubsDetails.State}</h4>
+                        </Carousel.Caption>
+                    </Carousel.Item>
                 </Carousel>
                 <div className='m-4'>
                     <p>
