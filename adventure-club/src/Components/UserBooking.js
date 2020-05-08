@@ -40,6 +40,9 @@ function UserBooking() {
         // console.log(dateInput.current.value);
         var param = bookAmenity.id.split('-');
         var club_id = param[0], activity_index = param[1], bookdate = dateInput.current.value;
+        var old_date = bookAmenity.date;
+        var new_date = dateInput.current.value;
+        bookAmenity.date = dateInput.current.value;
         // console.log(activity_index)
         fetch('http://localhost:3000/book/', {
             method: "post",
@@ -56,8 +59,9 @@ function UserBooking() {
             return response.json()
         }).then((response)=>{
             if(response.length>0){
+                bookAmenity.date = old_date;
                 alert("Date not available!");
-                return response;
+                return false;
             }
             else{
                 fetch('http://localhost:3000/booking/', {
@@ -73,12 +77,12 @@ function UserBooking() {
                         "status": 1
                     })
                 })
+                bookAmenity.date = new_date;
                 delete_row(bookAmenity.booking_id)
-                bookAmenity.date = dateInput.current.value;
+                return true;
                 
             }
         })
-        
         setShow(false);
     }
 
