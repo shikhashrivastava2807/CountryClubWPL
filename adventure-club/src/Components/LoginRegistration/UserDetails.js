@@ -29,7 +29,7 @@ class UserDetails extends Component {
    
     let userdetails =this.state.userdetails.map(function(item) {
         return (
-            <tr><td>{item.first_name}</td></tr>
+            <tr><td>{item.email}</td></tr>
         );
     });
 
@@ -37,7 +37,7 @@ class UserDetails extends Component {
     
     return(
         <>
-         <Table>
+         <Table striped bordered hover variant="dark">
            <tbody>
              {userdetails}
            </tbody>
