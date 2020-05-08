@@ -59,7 +59,6 @@ export class LocationList extends Component {
     }));
 
 
-
     render() {
         let editModalClose = () => this.setState({showEditModal:false}) ;
         let deleteModalClose = () => this.setState({showDeleteModal:false}) ;
@@ -69,7 +68,9 @@ export class LocationList extends Component {
                 <GridList cellHeight={250} className={classes.gridList} cols={3}>
                     {this.state.clubsList.map((tile) => (
                         <GridListTile key={tile.club_name}>
-                            <img src={require('../../images/'+tile.imagesPath[0])} alt={tile.club_name}/>
+                            {this.images = tile.imagesPath[0]?require('../../images/'+tile.imagesPath[0])
+                                :require('../../images/background.jpg')}
+                            <img src={this.images} alt={tile.club_name}/>
                             <GridListTileBar
                                 title={tile.club_name+','+tile.State}
                                 subtitle={<span>Type: {tile.club_type}</span>}
@@ -89,13 +90,14 @@ export class LocationList extends Component {
                 </GridList>
             </div>
         )
-
         const AdminLocationsView = (
             <div className={classes.root}>
                 <GridList cellHeight={250} className={classes.gridList} cols={3}>
                     {this.state.clubsList.map((tile) => (
                         <GridListTile key={tile.club_name}>
-                            <img src={require('../../images/'+tile.imagesPath[0])} alt={tile.club_name} />
+                            {this.images = tile.imagesPath[0]?require('../../images/'+tile.imagesPath[0])
+                                :require('../../images/background.jpg')}
+                            <img src={this.image} alt={tile.club_name} />
                             <GridListTileBar
                                 title={tile.club_name+','+tile.State}
                                 subtitle={<span>Type: {tile.club_type}</span>}

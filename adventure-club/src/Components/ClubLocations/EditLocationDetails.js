@@ -27,7 +27,6 @@ export class EditLocationDetails extends Component {
 
      onSubmit = event => {
         const clubInfo = {
-            id: this.state.id,
             club_name: this.state.club_name,
             club_type: this.state.club_type,
             address_line1: this.state.address_line1,
@@ -42,8 +41,7 @@ export class EditLocationDetails extends Component {
             ],
             description: this.state.description
         };
-        editClub(clubInfo).then(res => {
-            console.log('onedit')
+        editClub(this.state.id,clubInfo).then(res => {
             this.props.onHide();
         });
     }
