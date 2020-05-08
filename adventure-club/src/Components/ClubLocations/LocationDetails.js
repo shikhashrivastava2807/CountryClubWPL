@@ -39,6 +39,9 @@ export class LocationDetails extends Component {
                 console.log(err)
             })
     }
+    imagesPath1;
+    imagesPath2;
+    imagesPath3;
     render(){
         const unSignedButton = (
             <>
@@ -60,15 +63,24 @@ export class LocationDetails extends Component {
         )
         if (!this.state.clubsDetails.club_name) {
             return <span>Loading...</span>;
+        }else{
+            this.imagesPath1 = this.state.clubsDetails.imagesPath[0]?require('../../images/'+this.state.clubsDetails.imagesPath[0])
+                :require('../../images/background.jpg');
+            this.imagesPath2 = this.state.clubsDetails.imagesPath[1]?require('../../images/'+this.state.clubsDetails.imagesPath[1])
+                :require('../../images/background.jpg');
+            this.imagesPath3 = this.state.clubsDetails.imagesPath[2]?require('../../images/'+this.state.clubsDetails.imagesPath[2])
+                :require('../../images/background.jpg');
         }
+
         return(
             <>
                 <Carousel>
                         <Carousel.Item>
                             <img className="d-block w-100"
-                                 src={require("../../images/"+this.state.clubsDetails.imagesPath[0])}
+                                 src={this.imagesPath1}
                                  style={{height:610+'px'}}
-                                 mode='fit' />
+                                 mode='fit'
+                                 alt={this.state.clubsDetails.club_name}/>
                             <Carousel.Caption>
                                 <h4>{this.state.clubsDetails.club_name},{this.state.clubsDetails.State}
                                 </h4>
@@ -76,19 +88,21 @@ export class LocationDetails extends Component {
                         </Carousel.Item>
                     <Carousel.Item>
                             <img className="d-block w-100"
-                                 src={require("../../images/"+this.state.clubsDetails.imagesPath[1])}
+                                 src={this.imagesPath2}
                                  style={{height:610+'px'}}
-                                 mode='fit' />
+                                 mode='fit'
+                                 alt={this.state.clubsDetails.club_name}/>
                             <Carousel.Caption>
                                 <h4>{this.state.clubsDetails.club_name},{this.state.clubsDetails.State}</h4>
                             </Carousel.Caption>
                     </Carousel.Item>
                     <Carousel.Item>
                             <img className="d-block w-100"
-                                 src={require("../../images/"+this.state.clubsDetails.imagesPath[2])}
+                                 src={this.imagesPath3}
                                  style={{height:610+'px'}}
-                                 mode='fit' />
-                            <Carousel.Caption>
+                                 mode='fit'
+                                 alt={this.state.clubsDetails.club_name}/>
+                        <Carousel.Caption>
                                 <h4>{this.state.clubsDetails.club_name},{this.state.clubsDetails.State}</h4>
                             </Carousel.Caption>
                     </Carousel.Item>

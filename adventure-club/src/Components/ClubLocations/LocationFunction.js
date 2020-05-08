@@ -54,11 +54,11 @@ export const createNewClubs = newClub => {
         })
 }
 
-export const editClub = clubInfo => {
+export const editClub = (clubId,clubInfo) => {
     return axios
-        .put('http://localhost:3000/clubs/'+ clubInfo.id, clubInfo)
+        .put('http://localhost:3000/clubs/'+ clubId, clubInfo)
         .then(response => {
-            console.log('Club Created')
+            console.log('Club Edited')
         })
 }
 
