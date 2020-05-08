@@ -1,8 +1,8 @@
 import React from 'react';
 import MaterialTable from 'material-table';
 import CancelIcon from '@material-ui/icons/Cancel';
+import ScheduleIcon from '@material-ui/icons/Schedule';
 import {Modal, Button, Form} from 'react-bootstrap';
-import ConfirmationNumberIcon from '@material-ui/icons/ConfirmationNumber';
 function UserBooking() {
     var info = [];
     var columns;
@@ -40,7 +40,6 @@ function UserBooking() {
         // console.log(dateInput.current.value);
         var param = bookAmenity.id.split('-');
         var club_id = param[0], activity_index = param[1], bookdate = dateInput.current.value;
-        bookAmenity.date = dateInput.current.value;
         // console.log(activity_index)
         fetch('http://localhost:3000/book/', {
             method: "post",
@@ -75,6 +74,7 @@ function UserBooking() {
                     })
                 })
                 delete_row(bookAmenity.booking_id)
+                bookAmenity.date = dateInput.current.value;
                 
             }
         })
@@ -174,8 +174,8 @@ function UserBooking() {
                     }}
                     actions={[
                         rowData=>({
-                            icon: ConfirmationNumberIcon,
-                            tooltip: 'Confirm Booking',
+                            icon: ScheduleIcon,
+                            tooltip: 'Reschedule Booking',
                             disabled: rowData.booking_needed == "0",
                             onClick: (event, oldData) =>
                                 new Promise((resolve) => {
@@ -199,7 +199,7 @@ function UserBooking() {
                         }),
                         rowData=>({
                             icon: CancelIcon,
-                            tooltip: 'Confirm Booking',
+                            tooltip: 'Cancel Booking',
                             disabled: rowData.booking_needed == "0",
                             onClick: (event, oldData) =>
                             new Promise((resolve) => {
