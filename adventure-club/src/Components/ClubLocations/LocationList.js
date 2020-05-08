@@ -97,7 +97,7 @@ export class LocationList extends Component {
                         <GridListTile key={tile.club_name}>
                             {this.images = tile.imagesPath[0]?require('../../images/'+tile.imagesPath[0])
                                 :require('../../images/background.jpg')}
-                            <img src={this.image} alt={tile.club_name} />
+                            <img src={this.images} alt={tile.club_name} />
                             <GridListTileBar
                                 title={tile.club_name+','+tile.State}
                                 subtitle={<span>Type: {tile.club_type}</span>}
