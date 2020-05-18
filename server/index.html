@@ -1,0 +1,274 @@
+<!doctype html>
+<html lang="en">
+<!-- npm install form-serializer -->
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <!-- Bootstrap CSS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.serializeJSON/2.9.0/jquery.serializejson.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+        integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+        crossorigin="anonymous"></script>
+    <script>
+
+        $(document).ready(() => {
+            
+            var editClubId;
+            
+            // Adding New amenities block either of create club form or edit form section
+            const NewAmenitiesBlock = (block_id) => {
+                var block = `<label for="aname[]">Amenity name:</label><br>
+                                <input type="text" name="aname[]"><br>
+                                <label for="acat[]">Amenity cateogry:</label><br>
+                                <input type="text"  name="acat[]"><br>
+                                <label for="adesc[]">Amenity description:</label><br>
+                                <input type="text" name="adesc[]"><br>
+                                <input type="hidden" id="flag[]" name="flag[]" value=1>`;
+                console.log('added');
+                $(block_id).append(block);
+            }
+            
+            // when clicking add amenities in create clubs form
+            $('#addam').click(() => {
+                var i = parseInt($('#acount').val());
+                $('#acount').val(i + 1);
+                NewAmenitiesBlock('#amenities');
+            });
+            
+            // when clicking add amenities in edit club form
+            $('#addam_e').click(() => {
+                var i = parseInt($('#acount').val());
+                $('#acount_e').val(i + 1);
+                NewAmenitiesBlock('#amenities_e');
+            });
+            
+            // when submitting create new club form 
+            $('#newClubSubmit').click(()=>{
+                // e.preventDefault();
+                console.log('submitted');
+                // console.log($('#addclub').serializeJSON());
+                fetch('/clubs/',{
+                    method: 'post',
+                    body: JSON.stringify($('#addclub').serializeJSON()),
+                    headers: {
+                        "Content-Type" : "application/json; charset = utf-8"
+                    }
+                    
+                }).then((response)=>{
+                    return response.json(); 
+                }).then((response)=>{
+                    console.log("Inserted ObjectID: "+response.document._id);
+            
+                });
+                $("#addclub")[0].reset();
+                // $('#amenities').empty();
+            });
+            
+            // when exiting the create form clear ameneties block 
+            $('#newClubModal').on('hidden.bs.modal', function (e) {
+                $('#amenities').empty();
+                $('#acount').val(0);
+            })
+            
+            // populating the form when the editing the club form
+            const populate_form = (data) =>{
+                console.log(data);
+                var n = data.acount;
+                while(n>0){
+                    NewAmenitiesBlock('#amenities_e');
+                    n = n-1;
+                }
+                var form_elements = $("#editclub").find("input");
+                // console.log(form_elements);
+                form_elements[0].value = data.cname;
+                form_elements[1].value = data.ccat;
+                form_elements[2].value = data.caddr;
+                form_elements[3].value = data.acount;
+                var i;
+                var j=0;
+                for (i=5;i<form_elements.length;i+=4){
+                    form_elements[i].value = data.aname[j];
+                    form_elements[i+1].value = data.acat[j];
+                    form_elements[i+2].value = data.adesc[j];
+                    j++;
+                }
+                
+            }
+            
+            // returns the club information given club id
+            const getClubInfo = (id) => {
+                fetch('/clubs/'+id, { method: "get" }).then((response) => {
+                    return response.json();
+                }).then((data) => {
+                    populate_form(data);
+                });
+            }
+            
+            // trigger edit form when clicking specific club button
+            $('.clubbtn').click((e)=>{
+                var id = e.target.value;
+                // console.log(e.target.value);
+                getClubInfo(id);
+                editClubId = id;
+            })
+            // getClubInfo('5e9382442b38a405c47a83c2');
+
+            // on click event for edit club information form
+            $('#editClubSubmit').click(()=>{
+                fetch('/clubs/'+editClubId, {
+                    method: "put",
+                headers: {
+                    "Content-Type": "application/json; charset=utf-8"
+                },
+                body: JSON.stringify($('#editclub').serializeJSON())
+            }).then((response)=>{
+                return response.json();
+            }).then((data)=>{
+                if(data.ok==1){
+                     $("#editclub")[0].reset();
+                }})
+            })
+            
+            // removing amenities form when exiting the edit club info
+            $('#editClubModal').on('hidden.bs.modal', function (e) {
+                $('#amenities_e').empty();
+                $('#acount_e').val(0);
+            })
+            
+            // Filtering 
+            const query = (club_name, club_cat, club_address, acount, a_name, a_cat, a_desc)=>{
+                fetch('/clubs' , { method: "get" }).then((response) => {
+                    return response.json();
+                }).then((data) => {
+                    console.log(data);
+                    // filter data
+                    var fdata = [];
+                    var i,j,ok=0;
+                    for(i=0;i<data.length;i++){
+                        ok=-1;
+                        if ( data[i].cname.search(club_name)>=0 && data[i].ccat.search(club_cat)>=0
+                            && data[i].caddr.search(club_address)>=0 ) {
+                                ok = 1;
+                                if (data[i].acount>0){
+                                    j = 0;
+                                    for(j=0;j<data[i].aname.length;j++){
+                                        if(data[i].flag[j]==1){
+                                            if(data[i].aname[j].search(a_name)<0 || data[i].acat[j].search(a_cat)<0 || data[i].adesc[j].search(a_desc)<0){
+                                                ok=-1;
+                                                break;
+                                            }
+                                        }
+                                    }
+                                }
+                                if(data[i].acount<acount)
+                                    ok = -1;        
+                            }
+                        if(ok>0)
+                            fdata.push(data[i])
+                    }
+                    console.log(fdata);
+                    console.log(data[0].caddr.search('addr1'))
+                });
+            }
+            query("","","addr1",1,"","","");
+        });
+    </script>
+
+    <title>page2</title>
+</head>
+
+<body>
+    <h2>inserting to database</h2>
+
+    
+    <!-- Creat club form  -->
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#newClubModal">Add New Club</button>
+    <div class="modal fade" id="newClubModal" tabindex="-1" role="dialog" aria-labelledby="newClubModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="newClubModalLabel">New message</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id='addclub'>
+                        <label for="cname">Club name:</label><br>
+                        <input type="text" id="cname" name="cname"><br>
+                    
+                        <label for="ccat">Club Category:</label><br>
+                        <input type="text" id="ccat" name="ccat"><br>
+                    
+                        <label for="caddr">Club Address:</label><br>
+                        <input type="text" id="caddr" name="caddr"><br>
+                        <input type="hidden" id="acount" name="acount" value=0>
+                        <input type="hidden" id="status" name="status" value=1>
+                        <button id='addam' type="button">Add new Amenities</button>
+                        <div id='amenities'>
+                        </div>
+                    </form>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" id='newClubSubmit' class="btn btn-primary" data-dismiss="modal">Create Club</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+<h2>Editing existing data</h2>
+
+<!-- Edit club information form -->
+<button type="button" class="btn btn-primary clubbtn" data-toggle="modal" data-target="#editClubModal" value = '5e98a95737b36b07e07eb316'>Edit 1st club</button>
+<div class="modal fade" id="editClubModal" tabindex="-1" role="dialog" aria-labelledby="editClubModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editClubModalLabel">New message</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id='editclub'>
+                    <label for="cname">Club name:</label><br>
+                    <input type="text" id="cname_e" name="cname"><br>
+
+                    <label for="ccat">Club Category:</label><br>
+                    <input type="text" id="ccat_e" name="ccat"><br>
+
+                    <label for="caddr">Club Address:</label><br>
+                    <input type="text" id="caddr_e" name="caddr"><br>
+                    <input type="hidden" id="acount_e" name="acount" value=0>
+                    <input type="hidden" id="status_e" name="status" value=1>
+                    <button id='addam_e' type="button">Add new Amenities</button>
+                    <div id='amenities_e'>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" id='editClubSubmit' class="btn btn-primary" data-dismiss="modal">Edit Club</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+
+</html>
