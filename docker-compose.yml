@@ -1,8 +1,20 @@
-version: '2'
+version: '3'
 services:
-  client:
-    build: ./client
-    ports:
-      - '3000:3000'
-    depends_on:
-      - api
+    # server:
+    #     build: 
+    #         dockerfile: Dockerfile
+    #         context: ./server 
+    #     volumes:
+    #         - /app/node_modules 
+    #         - ./server:/app
+    
+    client: 
+        build: 
+          dockerfile: Dockerfile
+          context: ./client
+
+        expose: 
+          
+        volumes:
+          - /usr/src/app/client/node_modules 
+          - ./client:/usr/src/app/client/
