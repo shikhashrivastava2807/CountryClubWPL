@@ -1,20 +1,22 @@
 version: '3'
 services:
-    # server:
-    #     build: 
-    #         dockerfile: Dockerfile
-    #         context: ./server 
-    #     volumes:
-    #         - /app/node_modules 
-    #         - ./server:/app
+    server:
+        build: 
+            dockerfile: Dockerfile
+            context: ./server
+        image: "dockerkub8.azurecr.io/country_club_server" 
+        ports:
+          - "3000:3000"
+            # stdin_open: true
     
     client: 
         build: 
           dockerfile: Dockerfile
           context: ./client
-
-        expose: 
-          
-        volumes:
-          - /usr/src/app/client/node_modules 
-          - ./client:/usr/src/app/client/
+        image: "dockerkub8.azurecr.io/country_club_client" 
+        ports:
+          - "80:4000"
+        stdin_open: true
+        links:
+          - "server"
+        

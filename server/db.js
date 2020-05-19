@@ -3,7 +3,9 @@ const ObjectID = require('mongodb').ObjectID;
 // name of our database
 const dbname = "country_club";
 // location of where our mongoDB database is located
-const url = "mongodb://localhost:27017";
+// const url = "mongodb://localhost:27017";
+const url = "mongodb://countryclubdata:1PiGDocXDfB3dk7VVUNQr2dciX52zNXM1PlHUJd1nJ3KDH862Jjqd1D3lsQI2dt9lGgM56tmom61tXoAzdLmDA==@countryclubdata.mongo.cosmos.azure.com:10255/?ssl=true&appName=@countryclubdata@";
+
 // Options for mongoDB
 const mongoOptions = {useNewUrlParser : true, useUnifiedTopology: true};
 
